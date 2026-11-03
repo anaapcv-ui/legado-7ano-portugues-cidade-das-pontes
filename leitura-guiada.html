@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada · Cidade das Pontes · Português 7º</title>
+<style>
+  :root{
+    --fundo:#0b1822; --fundo2:#11233a; --borda:#1f3a52; --borda2:#2c5070;
+    --verde:#4fd8a6; --magenta:#b9a3ff; --laranja:#f6b443; --limao:#ffd166;
+    --vermelho:#ff6f61; --texto:#eef4f8; --cinza:#93a9bb; --postit:#ffe88a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Trebuchet MS',Verdana,'Segoe UI',sans-serif;background:
+    radial-gradient(900px 420px at 50% -8%,#16304a,#0b1822 62%),var(--fundo);
+    color:var(--texto);line-height:1.65;padding-bottom:60px;font-size:17px}
+  header{background:linear-gradient(120deg,#0f3a32,#12443a 50%,#2a1f33);padding:26px 18px;text-align:center;
+    box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--verde)}
+  header .selo{font-size:.76rem;letter-spacing:2px;color:#c4f3e2;text-transform:uppercase}
+  header h1{font-size:1.5rem;margin:6px 0 2px}
+  header p{color:#d6e3ee;font-size:.92rem}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .barra-nav a{background:var(--fundo2);color:var(--texto);text-decoration:none;padding:7px 12px;
+    border-radius:20px;font-size:.85rem;border:1px solid var(--borda)}
+  .barra-nav a.on{background:var(--verde);color:#062a1e;font-weight:bold}
+  .barra-nav a.lock{opacity:.5}
+  .intro{background:var(--fundo2);border:1px solid var(--borda);border-radius:14px;padding:16px;margin-bottom:16px}
+  .intro h2{color:var(--verde);font-size:1.1rem;margin-bottom:8px}
+  .intro ol{margin:8px 0 0 20px}
+  .legenda{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;font-size:.8rem}
+  .legenda span{padding:3px 10px;border-radius:12px;font-weight:bold}
+  .lg-ene{background:#3a2a10;color:var(--laranja)} .lg-mac{background:#123a2e;color:var(--verde)} .lg-mic{background:#2a2350;color:var(--magenta)} .lg-sau{background:#3a3010;color:var(--limao)}
+  .torre{display:flex;flex-wrap:wrap;gap:5px;margin:12px auto 0;justify-content:center}
+  .torre div{font-size:.72rem;text-align:center;border-radius:14px 14px 4px 4px;padding:3px 8px;background:#13283c;border:1px solid var(--borda2);color:var(--cinza)}
+  .torre div.ok{background:#123a2e;color:var(--verde);border-color:var(--verde)}
+  .torre div.atual{background:#2a2350;color:#ddd2ff;border-color:var(--magenta)}
+  .painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;
+    background:var(--fundo2);border:1px solid var(--borda);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+  .painel .btns{display:flex;gap:6px;flex-wrap:wrap}
+  button{cursor:pointer;font-family:inherit}
+  .mini{background:var(--fundo);color:var(--texto);border:1px solid var(--borda2);border-radius:8px;padding:6px 10px;font-size:.8rem}
+  .mini:hover{background:#183048}
+  .bloco{background:var(--fundo2);border:1px solid var(--borda);border-radius:16px;margin-bottom:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.35)}
+  .bloco.travado{opacity:.55}
+  .bloco-cab{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(90deg,#14293f,#183450);border-bottom:1px solid var(--borda)}
+  .bloco-cab .num{background:var(--laranja);color:#2a1a00;font-weight:bold;width:36px;height:36px;border-radius:50% 50% 50% 6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .bloco.mac .bloco-cab .num{background:var(--verde);color:#062a1e}
+  .bloco.mic .bloco-cab .num{background:var(--magenta);color:#1c1240}
+  .bloco.sau .bloco-cab .num{background:var(--limao);color:#2e2400}
+  .bloco-cab h3{font-size:1.06rem;color:#fff}
+  .bloco-cab .porto{font-size:.7rem;color:var(--cinza);letter-spacing:1px;text-transform:uppercase}
+  .bloco-corpo{padding:16px}
+  .texto p{margin-bottom:10px}
+  .texto ul{margin:0 0 10px 20px}
+  .texto li{margin-bottom:6px}
+  .texto .destaque{color:var(--laranja);font-weight:bold}
+  .bloco.mac .texto .destaque{color:var(--verde)}
+  .bloco.mic .texto .destaque{color:var(--magenta)}
+  .bloco.sau .texto .destaque{color:var(--limao)}
+  .olhar{background:#2a2412;border-left:3px solid var(--postit);padding:8px 12px;margin:0 0 10px;border-radius:0 8px 8px 0;font-size:.93rem}
+  .olhar b{color:var(--postit)}
+  .cadeado{padding:22px 16px;text-align:center;color:var(--cinza);font-size:.9rem}
+  .perg{background:#0f1f30;border:1px solid var(--borda);border-radius:12px;padding:12px;margin-top:14px}
+  .perg.red{border-color:var(--vermelho);box-shadow:0 0 0 1px var(--vermelho)}
+  .perg .tag{display:inline-block;font-size:.66rem;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+  .tag.conc{background:#2a2350;color:#ddd2ff}
+  .tag.apl{background:#123a2e;color:#c4f3e2}
+  .perg label{display:block;font-weight:600;margin-bottom:8px}
+  .perg textarea{width:100%;min-height:72px;background:#0a1520;color:var(--texto);border:1px solid var(--borda2);border-radius:8px;padding:9px;font-family:inherit;font-size:.97rem;resize:vertical}
+  .aviso{margin-top:8px;padding:9px 11px;border-radius:8px;font-size:.87rem;display:none}
+  .aviso.amarelo{display:block;background:#4a3d12;border:1px solid var(--limao);color:#fff1ad}
+  .aviso.vermelho{display:block;background:#4a1d1c;border:1px solid var(--vermelho);color:#ffd0cb}
+  .modelo{margin-top:10px;padding:10px 12px;background:#10302a;border:1px solid var(--verde);border-radius:8px;font-size:.92rem;display:none}
+  .modelo.show{display:block}
+  .modelo .lab{color:#a8f0d4;font-weight:bold;font-size:.78rem;text-transform:uppercase;letter-spacing:1px}
+  .chk{margin-top:10px;font-size:.9rem}
+  .chk .item{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}
+  .chk .item span{flex:1;min-width:180px}
+  .chk .simnao button{border:1px solid var(--borda2);background:#0a1520;color:var(--texto);border-radius:6px;padding:4px 10px;margin-left:4px;font-size:.8rem}
+  .chk .simnao button.sim.ativo{background:var(--verde);border-color:var(--verde);color:#062a1e}
+  .chk .simnao button.nao.ativo{background:var(--vermelho);border-color:var(--vermelho);color:#fff}
+  .conferir{margin-top:14px;background:var(--verde);color:#062a1e;border:none;border-radius:10px;padding:11px 18px;font-size:1rem;font-weight:bold;width:100%}
+  .conferir:disabled{background:#1c2b3a;color:#6d8296;cursor:not-allowed}
+  .status-bloco{margin-top:10px;text-align:center;font-weight:bold;font-size:.95rem}
+  .prox{margin-top:12px;text-align:center}
+  .prox a{color:var(--verde);text-decoration:none;font-weight:bold}
+  .peg{background:#3a1a1c;border:2px solid var(--vermelho);border-radius:16px;padding:16px;margin-top:20px}
+  .peg h3{color:#ffbcb5;margin-bottom:10px}
+  .peg ol{margin-left:20px}
+  .peg li{margin-bottom:7px}
+  .cobertura{background:var(--fundo2);border:1px solid var(--borda);border-radius:16px;padding:16px;margin-top:18px}
+  .cobertura h3{color:var(--verde);margin-bottom:10px}
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th,td{border:1px solid var(--borda);padding:7px 9px;text-align:left}
+  th{background:#14293f}
+  .revisar{background:#3a2e06;border:2px solid var(--limao);border-radius:16px;padding:16px;margin-top:18px}
+  .revisar h3{color:var(--limao);margin-bottom:8px}
+  .revisar ul{margin-left:18px}
+  .relatorio{background:var(--fundo2);border:1px dashed var(--verde);border-radius:14px;padding:16px;margin-top:18px;font-size:.9rem}
+  .relatorio h3{color:var(--verde);margin-bottom:8px}
+  .trilha-fim{background:linear-gradient(120deg,#0f3a32,#12443a);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:18px;text-align:center}
+  .trilha-fim h3{color:#a8f0d4;margin-bottom:8px}
+  .trilha-fim a.btn{display:inline-block;margin-top:8px;background:var(--verde);color:#062a1e;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:10px}
+  .trilha-fim a.btn.off{background:#1c2b3a;color:#6d8296;pointer-events:none}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--fundo2);border:1px solid var(--verde);border-radius:14px;padding:20px;max-width:420px;text-align:center}
+  .modal p{margin-bottom:14px}
+  .modal button{background:var(--verde);color:#062a1e;border:none;border-radius:8px;padding:9px 16px;font-weight:bold}
+  .rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Cidade das Pontes · Português 7º ano · Colégio Legado</div>
+  <h1>📖 Leitura Guiada — Atravessando as Pontes</h1>
+  <p>Cap. 9 · Termos integrantes da oração · Cap. 10 · Conjunções · Prova 04/11 · Bernoulli</p>
+</header>
+
+<div class="wrap">
+  <nav class="barra-nav" id="nav">
+    <a class="on" href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html" data-etapa="quiz">🎯 Quiz</a>
+    <a href="resumo.html" data-etapa="resumo">🗺️ Resumo</a>
+    <a href="simulado.html" data-etapa="simulado">📝 Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </nav>
+
+  <div class="intro">
+    <h2>🌉 Bem-vindo(a) à Cidade das Pontes</h2>
+    <p>Uma cidade cortada por rios, iluminada por lampiões. Aqui, as palavras só se entendem quando estão <b>ligadas</b>: os complementos se ligam ao verbo ou ao nome, e as conjunções ligam as ideias. São <b>12 pontes</b>, e cada uma só baixa quando você <b>conferir</b> a anterior.</p>
+    <ol>
+      <li>Leia a ponte com calma (tudo aqui vem do seu livro).</li>
+      <li>Responda as 3 perguntas <b>escrevendo</b> com as suas palavras (não vale copiar o texto).</li>
+      <li>Clique em <b>Conferir</b>: aparece a resposta-modelo e uma autoavaliação Sim/Não.</li>
+      <li>Com as 12 pontes conferidas e a autoavaliação respondida, o <b>🎯 Quiz destrava</b>.</li>
+    </ol>
+    <div class="legenda"><span class="lg-ene">🏛️ Complemento verbal</span><span class="lg-mac">🔑 Complemento nominal</span><span class="lg-sau">🧩 Agente da passiva</span><span class="lg-mic">🔗 Conjunções</span></div>
+    <div class="torre" id="torre"></div>
+  </div>
+
+  <div class="painel">
+    <span id="salvo">💾 Progresso salvo automaticamente.</span>
+    <div class="btns">
+      <button class="mini" onclick="exportar()">📥 Exportar</button>
+      <button class="mini" onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button class="mini" onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+
+  <div id="blocos"></div>
+
+  <div class="peg">
+    <h3>⚠️ 10 Pegadinhas da Prova (não caia nelas!)</h3>
+    <ol>
+      <li><b>O “a” que engana:</b> em “assistiu <b>a</b> vários filmes”, o “a” vem antes de palavra masculina e no plural — não é artigo, é <b>preposição</b>. Por isso o complemento é <b>objeto indireto</b>.</li>
+      <li><b>Pergunta-chave:</b> entre o verbo e o complemento há preposição? <b>Não</b> → objeto direto. <b>Sim</b> → objeto indireto.</li>
+      <li><b>Assistir muda de sentido:</b> “assistiu <b>os pacientes</b>” = cuidar (objeto direto); “assistimos <b>ao filme</b>” = ver (objeto indireto).</li>
+      <li><b>Bitransitivo</b> não é verbo com dois objetos diretos: é verbo com <b>um objeto direto + um objeto indireto</b> (emprestar <b>algo a alguém</b>).</li>
+      <li><b>OI × complemento nominal:</b> os dois costumam ter preposição. O <b>OI completa o verbo</b>; o <b>complemento nominal completa um nome</b> (substantivo abstrato, adjetivo ou advérbio).</li>
+      <li><b>Complemento nominal tem preposição SEMPRE</b>, carrega o sentido de <b>alvo</b> (“admiração <b>pela arte</b>”) e <b>não indica posse</b>.</li>
+      <li><b>Nem todo verbo</b> tem complemento verbal, e <b>nem todo nome</b> precisa de complemento nominal.</li>
+      <li><b>Agente da passiva só existe com sujeito paciente</b> — e é <b>facultativo</b>: pode não aparecer (“São apresentadas dificuldades...” não diz quem apresentou).</li>
+      <li><b>Voz passiva analítica</b> = verbo auxiliar (geralmente <b>ser</b>) + <b>particípio</b>. Na troca: objeto direto → sujeito paciente; sujeito ativo → agente da passiva (“<b>pelos</b> alunos”).</li>
+      <li><b>A conjunção depende do contexto:</b> o “e” pode somar ou contradizer; “porque” aparece como explicativa (coordenativa) e como causal (subordinativa); “se” pode ser integrante ou condicional. Leia a frase inteira!</li>
+    </ol>
+  </div>
+
+  <div class="cobertura">
+    <h3>🧭 Cobertura: Tópico → Ponte</h3>
+    <table>
+      <thead><tr><th>Tópico</th><th>Páginas (Bernoulli)</th><th>Ponte</th></tr></thead>
+      <tbody>
+        <tr><td>Termos essenciais × termos integrantes; complemento verbal (verbo possuir)</td><td>27–28</td><td>1</td></tr>
+        <tr><td>Objeto indireto; “a” preposição × artigo (assistiu a vários filmes)</td><td>28</td><td>2</td></tr>
+        <tr><td>Objeto direto; esquema verbo → preposição? sim/não</td><td>29</td><td>3</td></tr>
+        <tr><td>Verbo assistir: cuidar (OD) × ver (OI)</td><td>30</td><td>4</td></tr>
+        <tr><td>Verbo bitransitivo (emprestar); transitividade (VTD, VTI, bitransitivo)</td><td>30–31</td><td>5</td></tr>
+        <tr><td>Complemento nominal; morfologia; nomes (substantivo abstrato, adjetivo, advérbio); “desejo de decifrar”; Atenção!</td><td>31–32</td><td>6</td></tr>
+        <tr><td>OD + complemento nominal no trecho das HQs; esquema do complemento; DICA (alvo, não indica posse)</td><td>32–33</td><td>7</td></tr>
+        <tr><td>Sujeito ativo × sujeito paciente; ordem canônica</td><td>33–34</td><td>8</td></tr>
+        <tr><td>Agente da passiva; voz passiva analítica; facultativo; transformação ativa → passiva; ênfase</td><td>34–35</td><td>9</td></tr>
+        <tr><td>Conjunção: definição, valor semântico, coordenativas × subordinativas (texto do MPF)</td><td>93–94</td><td>10</td></tr>
+        <tr><td>Coordenativas: aditivas, adversativas, explicativas, conclusivas, alternativas; uso adequado (Ex. 13, 14, 17)</td><td>94–97</td><td>11</td></tr>
+        <tr><td>Subordinativas: integrantes (que, se) e as 9 adverbiais</td><td>97–98</td><td>12</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="revisar" id="revisar" style="display:none">
+    <h3>🔁 Para revisar antes da prova</h3>
+    <ul id="revisar-lista"></ul>
+  </div>
+
+  <div class="relatorio">
+    <h3>📊 Para os pais (resumo desta leitura)</h3>
+    <div id="rel-conteudo">Assim que o aprendiz for conferindo as pontes, o resumo aparece aqui.</div>
+  </div>
+
+  <div class="trilha-fim" id="trilha-fim">
+    <h3>🔒 Próxima etapa: Quiz</h3>
+    <p id="trilha-fim-txt">O Quiz destrava quando as 12 pontes estiverem conferidas e a autoavaliação respondida.</p>
+    <a class="btn off" id="btn-prox" href="quiz.html">🎯 Ir para o Quiz</a>
+  </div>
+
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 🌉🏮 Boa prova!</div>
+</div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <p id="modal-txt"></p>
+    <button onclick="fecharModal()" id="modal-ok">Ok</button>
+    <button class="mini" onclick="fecharModal()" id="modal-cancel" style="display:none;margin-left:8px">Cancelar</button>
+  </div>
+</div>
+
+<script>
+/* ====== TRILHA COM CADEADOS (módulo comum do kit) ====== */
+var KIT='cidade_pontes';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Guiada', arquivo:'leitura-guiada.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+links[i].textContent.replace('🔒 ',''); links[i].setAttribute('title','Ainda trancado'); } else { links[i].classList.remove('lock'); links[i].textContent=links[i].textContent.replace('🔒 ',''); } }
+}
+
+/* ====== PONTES (conteúdo do livro Bernoulli Língua Portuguesa 7º — Cap. 9, pp. 27-35, e Cap. 10, pp. 93-98, das fotos) ====== */
+var BLOCOS = [
+ {
+  porto:"Ponte 1 · Complemento verbal", emoji:"🏛️", u:"ene",
+  titulo:"Termos essenciais e termos integrantes",
+  texto:[
+   "Você já sabe que toda oração se apoia em dois <span class='destaque'>termos essenciais</span>: o <b>sujeito</b> e o <b>predicado</b>. O livro lembra que somos seres muito comunicativos e usamos a linguagem para mostrar tudo o que sentimos — por isso, só esses dois termos muitas vezes não bastam.",
+   "Para <b>integrar</b> (completar) os termos obrigatórios, entram em cena os <span class='destaque'>termos integrantes da oração</span>. São três: o <b>complemento verbal</b> (os objetos), o <b>complemento nominal</b> e o <b>agente da passiva</b>. Na Cidade das Pontes, eles são as ligações que deixam a frase completa.",
+   "Veja o exemplo do livro: “O prédio do museu possui uma arquitetura inglesa do século XX.” O sujeito é <b>o prédio do museu</b> e o predicado é <b>possui uma arquitetura inglesa do século XX</b>. Repare no verbo <b>possuir</b>: ninguém fala só “ah, ele possui...” e para. Falta alguma coisa!",
+   "Esse “algo” que completa o sentido do verbo é o <span class='destaque'>complemento verbal</span>. No exemplo, ele é <b>uma arquitetura inglesa do século XX</b>. Pelo próprio nome você já descobre o que ele completa: o <b>verbo</b>.",
+   "<div class='olhar'><b>Na Cidade das Pontes:</b> sujeito e predicado são as duas margens principais. Os termos integrantes são as pontes que completam a travessia.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais são os dois termos essenciais da oração e quais são os três termos integrantes que o livro apresenta?",modelo:"Essenciais: sujeito e predicado. Integrantes: complemento verbal (os objetos), complemento nominal e agente da passiva.",chk:["Citei sujeito e predicado como essenciais?","Citei os três integrantes (complemento verbal, complemento nominal e agente da passiva)?"]},
+   {tag:"apl",q:"Na frase “O Museu da Língua Portuguesa possui um acervo incrível”, separe o sujeito e o predicado e diga qual é o complemento do verbo.",modelo:"Sujeito: O Museu da Língua Portuguesa. Predicado: possui um acervo incrível. O complemento do verbo possuir é “um acervo incrível”.",chk:["Separei sujeito e predicado corretamente?","Apontei “um acervo incrível” como complemento do verbo?"]},
+   {tag:"apl",q:"Um colega escreveu: “A minha escola possui.” Explique para ele, com as suas palavras, por que a frase parece incompleta e mostre como completá-la.",modelo:"Porque o verbo possuir precisa de um complemento: quem possui, possui alguma coisa. Completa: “A minha escola possui uma biblioteca nova.” — “uma biblioteca nova” é o complemento verbal.",chk:["Expliquei que o verbo precisa de complemento (quem possui, possui algo)?","Completei a frase com um complemento?"]}
+  ]
+ },
+ {
+  porto:"Ponte 2 · Complemento verbal", emoji:"🌉", u:"ene",
+  titulo:"Objeto indireto: o complemento que precisa de ponte",
+  texto:[
+   "Olhe esta frase do livro: “Mariana assistiu a vários filmes no Museu da Língua Portuguesa.” O sujeito é <b>Mariana</b>. O predicado começa pelo verbo <b>assistiu</b>, que aqui significa <b>ver algo</b>.",
+   "Agora o detalhe que engana muita gente: o <b>“a”</b> de “a vários filmes”. A palavra <b>filmes</b> é <b>masculina</b> e está no <b>plural</b>. Então esse “a” não pode ser um artigo! Ele é uma <span class='destaque'>preposição</span> — aquela palavra que usamos para <b>unir termos ou expressões</b>.",
+   "No sentido de “ver algo”, <b>quem assiste, assiste a algo</b>. A preposição “a” é a companheira do verbo assistir. O complemento só consegue se ligar ao verbo se a preposição estiver lá.",
+   "Quando o complemento do verbo precisa de preposição para se ligar a ele, temos o <span class='destaque'>objeto indireto</span>. Na frase: <b>“a vários filmes no Museu da Língua Portuguesa”</b> é objeto indireto.",
+   "<div class='olhar'><b>Na Cidade das Pontes:</b> o objeto indireto não chega sozinho ao verbo — ele atravessa a ponte da preposição.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Por que o “a” de “a vários filmes” não pode ser um artigo? Então, o que ele é?",modelo:"Porque “filmes” é uma palavra masculina e está no plural; esse “a” não combina como artigo. Ele é uma preposição, palavra que une termos.",chk:["Disse que “filmes” é masculino e plural?","Concluí que o “a” é preposição?"]},
+   {tag:"apl",q:"Na frase do livro “Nós assistimos ao filme ontem”, o verbo assistir tem o sentido de “ver algo”. Qual é o complemento do verbo e de que tipo ele é? Justifique.",modelo:"O complemento é “ao filme”. É objeto indireto, porque no sentido de ver algo o verbo assistir pede a preposição “a” (quem assiste, assiste a algo).",chk:["Apontei “ao filme” como complemento?","Classifiquei como objeto indireto por causa da preposição?"]},
+   {tag:"apl",q:"Crie uma frase sua com o verbo assistir no sentido de “ver algo” e indique o objeto indireto.",modelo:"Exemplo: “Meu primo assistiu a um jogo de vôlei.” Objeto indireto: “a um jogo de vôlei” (começa com a preposição “a”).",chk:["Usei assistir no sentido de ver?","O complemento que indiquei começa com a preposição “a”?"]}
+  ]
+ },
+ {
+  porto:"Ponte 3 · Complemento verbal", emoji:"➡️", u:"ene",
+  titulo:"Objeto direto: a passagem sem ponte",
+  texto:[
+   "Diferente do verbo assistir (no sentido de ver), o verbo <b>possuir</b> não tem preposição antes do seu complemento. Exemplo do livro: “O Museu da Língua Portuguesa possui um acervo incrível.”",
+   "O verbo <b>possui</b> é completado por <b>um acervo incrível</b> sem nenhuma preposição no meio. Quando o complemento se liga ao verbo direto, sem preposição, ele é o <span class='destaque'>objeto direto</span>.",
+   "O livro resume tudo num esquema simples. Olhe o <b>verbo</b> e pergunte: entre ele e o complemento existe <b>preposição</b>?",
+   "<ul><li><b>SIM</b>, tem preposição → <b>objeto indireto</b>.</li><li><b>NÃO</b>, não tem preposição → <b>objeto direto</b>.</li></ul>",
+   "O mesmo vale para “O prédio do museu possui <b>uma arquitetura inglesa do século XX</b>” e para “Os alunos escreveram <b>um artigo científico</b>”: nos dois casos o complemento entra direto — é objeto direto.",
+   "<div class='olhar'><b>Na Cidade das Pontes:</b> o objeto direto vai a pé, direto ao verbo, sem precisar de ponte.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual pergunta o esquema do livro manda fazer para saber se um complemento verbal é objeto direto ou indireto?",modelo:"Perguntar se há preposição entre o verbo e o complemento: com preposição é objeto indireto; sem preposição é objeto direto.",chk:["Falei da preposição como critério?","Liguei “com preposição” a OI e “sem preposição” a OD?"]},
+   {tag:"apl",q:"Na frase do texto sobre leis “Os procuradores da República investigam e levam o caso ao poder Judiciário”, o verbo levar tem dois complementos. Aponte o que é objeto direto e explique como você descobriu.",modelo:"Objeto direto: “o caso”, porque se liga ao verbo levar sem preposição (levam o quê? o caso). “ao poder Judiciário” vem com preposição.",chk:["Apontei “o caso” como objeto direto?","Usei a ausência de preposição como justificativa?"]},
+   {tag:"apl",q:"Compare “possui um acervo incrível” com “assistiu a vários filmes”. Explique a diferença na forma como o complemento se liga ao verbo em cada uma.",modelo:"Em “possui um acervo incrível” o complemento se liga direto, sem preposição: objeto direto. Em “assistiu a vários filmes” ele precisa da preposição “a”: objeto indireto.",chk:["Disse que o primeiro é sem preposição (OD)?","Disse que o segundo tem a preposição “a” (OI)?"]}
+  ]
+ },
+ {
+  porto:"Ponte 4 · Complemento verbal", emoji:"🩺", u:"ene",
+  titulo:"O complemento muda o sentido do verbo: assistir",
+  texto:[
+   "Por que é tão importante saber se o complemento é direto ou indireto? Porque <b>os verbos podem mudar de sentido dependendo dos seus complementos</b>. O livro mostra isso com o verbo <span class='destaque'>assistir</span>.",
+   "<b>Assistir = cuidar.</b> “A enfermeira <b>assistiu os pacientes</b> no hospital.” Aqui o complemento <b>os pacientes</b> entra direto, sem preposição: é <b>objeto direto</b>.",
+   "<b>Assistir = ver algo.</b> “Nós <b>assistimos ao filme</b> ontem.” Aqui o complemento <b>ao filme</b> vem com a preposição “a”: é <b>objeto indireto</b>.",
+   "Então, quando aparecer o verbo assistir na prova, olhe o complemento: <b>sem preposição</b>, a ideia é de <b>cuidar</b>; <b>com a preposição “a”</b>, a ideia é de <b>ver</b>.",
+   "<div class='olhar'><b>Na Cidade das Pontes:</b> o mesmo verbo pode levar a dois bairros diferentes — depende se o caminho tem ponte ou não.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais são os dois sentidos do verbo assistir mostrados no livro e que tipo de objeto aparece em cada um?",modelo:"Assistir com sentido de cuidar: objeto direto (sem preposição). Assistir com sentido de ver algo: objeto indireto (com a preposição “a”).",chk:["Citei os sentidos cuidar e ver?","Liguei cuidar a OD e ver a OI?"]},
+   {tag:"apl",q:"“O médico assistiu os feridos do acidente.” Qual é o sentido do verbo assistir nessa frase e qual é o tipo do objeto? Justifique.",modelo:"Sentido de cuidar. “os feridos do acidente” é objeto direto, porque se liga ao verbo sem preposição.",chk:["Disse que o sentido é cuidar?","Classifiquei como objeto direto por não ter preposição?"]},
+   {tag:"apl",q:"Escreva duas frases suas com o verbo assistir: uma com sentido de cuidar e outra com sentido de ver. Classifique o objeto de cada uma.",modelo:"Exemplo: “A veterinária assistiu os cachorros resgatados.” (cuidar — objeto direto: os cachorros resgatados). “Assisti a uma peça de teatro.” (ver — objeto indireto: a uma peça de teatro).",chk:["Fiz uma frase de cuidar com objeto sem preposição?","Fiz uma frase de ver com objeto começando pela preposição “a”?"]}
+  ]
+ },
+ {
+  porto:"Ponte 5 · Complemento verbal", emoji:"🤝", u:"ene",
+  titulo:"Verbo bitransitivo e transitividade",
+  texto:[
+   "Um verbo pode ter <b>dois tipos de objeto na mesma oração</b>. É o caso de <b>emprestar</b>: quem empresta, empresta <b>algo</b> a <b>alguém</b>. Exemplo do livro: “Jonas emprestou o guia de visita do museu ao colega.”",
+   "Faça as perguntas ao verbo: emprestou <b>o quê?</b> → <b>o guia de visita do museu</b> (sem preposição: <b>objeto direto</b>). Emprestou <b>a quem?</b> → <b>ao colega</b> (com preposição: <b>objeto indireto</b>).",
+   "Quando o complemento do verbo é formado por um objeto direto <b>e</b> um objeto indireto, o verbo é <span class='destaque'>bitransitivo</span>.",
+   "Essa relação entre o verbo e os seus complementos tem um nome: <span class='destaque'>transitividade</span>. O livro apresenta três tipos:",
+   "<ul><li><b>Verbo transitivo direto</b> — exige um <b>objeto direto</b> (ex.: possuir algo).</li><li><b>Verbo transitivo indireto</b> — deve ser completado por um <b>objeto indireto</b> (ex.: assistir a algo, no sentido de ver).</li><li><b>Verbo bitransitivo</b> — completa-se com um objeto <b>direto</b> e outro <b>indireto</b> (ex.: emprestar algo a alguém).</li></ul>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"O que é transitividade e quais são os três tipos de verbo apresentados no quadro do livro?",modelo:"Transitividade é a relação entre o verbo e seus complementos. Tipos: transitivo direto (exige objeto direto), transitivo indireto (exige objeto indireto) e bitransitivo (exige um objeto direto e um indireto).",chk:["Defini transitividade como relação verbo–complementos?","Citei os três tipos com o objeto de cada um?"]},
+   {tag:"apl",q:"“A diretora entregou os boletins aos pais.” Faça as perguntas “o quê?” e “a quem?” ao verbo e classifique cada complemento. Como se classifica o verbo entregar nessa frase?",modelo:"Entregou o quê? “os boletins” — objeto direto (sem preposição). Entregou a quem? “aos pais” — objeto indireto (com preposição). O verbo é bitransitivo.",chk:["Classifiquei “os boletins” como OD e “aos pais” como OI?","Disse que o verbo é bitransitivo?"]},
+   {tag:"apl",q:"Classifique quanto à transitividade os verbos destes trechos do livro: “possui um acervo incrível”; “assistiu a vários filmes” (sentido de ver); “emprestou o guia de visita do museu ao colega”.",modelo:"Possuir: transitivo direto. Assistir (ver): transitivo indireto. Emprestar: bitransitivo.",chk:["Acertei possuir como transitivo direto?","Acertei assistir como transitivo indireto e emprestar como bitransitivo?"]}
+  ]
+ },
+ {
+  porto:"Ponte 6 · Complemento nominal", emoji:"🔑", u:"mac",
+  titulo:"Complemento nominal: a ponte que liga a um nome",
+  texto:[
+   "Até agora as pontes chegavam ao <b>verbo</b>. Agora elas chegam a um <b>nome</b>. Como o próprio nome já diz, o <span class='destaque'>complemento nominal</span> ajuda a construir o sentido de um nome.",
+   "Pela <b>morfologia</b> (a parte da gramática que estuda a estrutura, a formação e a classificação das palavras), <b>nomes</b> são as palavras que mudam de número e gênero: os <b>substantivos</b> e os <b>adjetivos</b>. Entre os substantivos, o complemento nominal acompanha os <b>substantivos abstratos</b>. Ele também pode se unir a <b>advérbios</b>.",
+   "Exemplo de um artigo científico sobre histórias em quadrinhos: “No constante <b>desejo de decifrar</b>...”. Separando: <b>desejo</b> = substantivo; <b>de</b> = preposição; <b>decifrar</b> = verbo.",
+   "Se alguém pergunta se você tem algum desejo, você responde que tem desejo <b>de</b> alguma coisa: ninguém sente apenas desejo. Esse “de alguma coisa” é o <span class='destaque'>complemento nominal</span>. Em “desejo de decifrar”, o complemento nominal é <b>de decifrar</b>.",
+   "<div class='olhar'><b>Atenção!</b> Assim como nem todo verbo possui complemento verbal, <b>nem todo nome precisa de complemento nominal</b>.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Segundo o livro, a que tipos de palavra o complemento nominal pode se ligar?",modelo:"A nomes: substantivos (principalmente os abstratos) e adjetivos; e também a advérbios.",chk:["Citei substantivo abstrato e adjetivo?","Citei também o advérbio?"]},
+   {tag:"apl",q:"Crie uma frase sua usando a palavra “desejo” seguida de um complemento. Indique qual é o nome completado e qual é o complemento nominal.",modelo:"Exemplo: “Tenho desejo de conhecer o mar.” Nome completado: desejo. Complemento nominal: “de conhecer o mar”.",chk:["Indiquei “desejo” como o nome completado?","O complemento que indiquei começa com preposição?"]},
+   {tag:"apl",q:"Explique a diferença entre o complemento de “O museu possui um acervo incrível” e o de “desejo de decifrar”.",modelo:"Em “possui um acervo incrível” o complemento completa um verbo (possuir) e não tem preposição: é objeto direto. Em “desejo de decifrar” o complemento completa um nome (o substantivo desejo) e vem com preposição: é complemento nominal.",chk:["Disse que o primeiro completa um verbo (OD)?","Disse que o segundo completa um nome, com preposição (CN)?"]}
+  ]
+ },
+ {
+  porto:"Ponte 7 · Complemento nominal", emoji:"🎯", u:"mac",
+  titulo:"Objeto indireto ou complemento nominal? A dica do livro",
+  texto:[
+   "Veja outro trecho sobre as HQs: elas “proporcionam um ensino significativo, produtivo e relevante para a construção do conhecimento”. Quem proporciona, proporciona algo: <b>um ensino significativo, produtivo e relevante para a construção do conhecimento</b> é o <b>objeto direto</b> de proporcionar.",
+   "Dentro dele há mais uma ponte. O ensino é significativo <b>para</b>, produtivo <b>para</b> e relevante <b>para</b> a construção do conhecimento. <b>“para a construção do conhecimento”</b> completa esses adjetivos: é um <span class='destaque'>complemento nominal</span>.",
+   "O esquema do livro: no <b>complemento verbal</b>, sem preposição é objeto direto e com preposição é objeto indireto. No <b>complemento nominal</b>, a preposição aparece <b>SEMPRE</b>.",
+   "<b>DICA do livro:</b> objeto indireto e complemento nominal costumam ter preposição, então muita atenção! O <b>objeto</b> completa o <b>verbo</b>; o <b>complemento nominal</b> completa um <b>nome</b> (substantivo abstrato, adjetivo ou advérbio).",
+   "O complemento nominal carrega o sentido de <b>alvo</b> de uma ação: “A cidade tem <b>admiração pela arte</b>.” A arte recebe a admiração, é o alvo; então <b>pela arte</b> é complemento nominal de admiração. E mais: o complemento nominal <b>não indica posse</b>."
+  ],
+  perguntas:[
+   {tag:"conc",q:"Objeto indireto e complemento nominal costumam ter preposição. Como diferenciar os dois?",modelo:"Vendo a palavra que eles completam: o objeto indireto completa um verbo; o complemento nominal completa um nome (substantivo abstrato, adjetivo ou advérbio).",chk:["Disse que o OI completa um verbo?","Disse que o CN completa um nome?"]},
+   {tag:"apl",q:"“Os estudantes têm admiração pelos cientistas.” Aponte o complemento nominal, o nome que ele completa e mostre o sentido de alvo.",modelo:"Complemento nominal: “pelos cientistas”. Ele completa o substantivo “admiração”. Os cientistas são o alvo, quem recebe a admiração.",chk:["Apontei “pelos cientistas” como CN de admiração?","Expliquei que os cientistas recebem a admiração (alvo)?"]},
+   {tag:"apl",q:"Classifique os termos destacados e diga qual palavra cada um completa: (a) assistiu A VÁRIOS FILMES; (b) desejo DE DECIFRAR; (c) relevante PARA A CONSTRUÇÃO DO CONHECIMENTO.",modelo:"(a) Objeto indireto — completa o verbo assistir. (b) Complemento nominal — completa o substantivo desejo. (c) Complemento nominal — completa o adjetivo relevante.",chk:["Classifiquei (a) como objeto indireto do verbo?","Classifiquei (b) e (c) como complemento nominal de um nome?"]}
+  ]
+ },
+ {
+  porto:"Ponte 8 · Agente da passiva", emoji:"🎬", u:"sau",
+  titulo:"Sujeito ativo e sujeito paciente",
+  texto:[
+   "No resumo de um artigo científico sobre ciência e cinema, lemos: “Este artigo <b>explora</b> alguns dos vínculos entre a ciência e o cinema”. O sujeito de “explora” é <b>este artigo</b>. Ele é um <span class='destaque'>sujeito ativo</span>: realiza a ação do verbo e concorda com ele em pessoa e número (3ª pessoa do singular).",
+   "Mais adiante: “<b>São apresentadas</b> dificuldades na avaliação da influência do cinema.” Colocando na <b>ordem canônica</b> (a ordem padrão, mais comum): “Dificuldades na avaliação da influência do cinema <b>são apresentadas</b>.”",
+   "Com a forma composta “são apresentadas”, percebemos que <b>alguém de fora</b> fez a ação de apresentar. O sujeito “dificuldades na avaliação da influência do cinema” não apresentou nada — ele <b>sofre/recebe</b> a ação. Esse é o <span class='destaque'>sujeito paciente</span> (ou passivo). Ele concorda em número com o verbo “são”.",
+   "Se quisermos o sujeito ativo de novo: “<b>O artigo</b> apresentou as dificuldades na avaliação da influência do cinema.” Agora “o artigo” realiza a ação, “as dificuldades na avaliação da influência do cinema” vira <b>objeto direto</b>, e “apresentadas” volta a ser um verbo conjugado (apresentou) concordando com o sujeito."
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual é a diferença entre sujeito ativo e sujeito paciente?",modelo:"O sujeito ativo realiza a ação do verbo. O sujeito paciente (passivo) sofre ou recebe a ação, que é feita por outra pessoa ou coisa.",chk:["Disse que o ativo realiza a ação?","Disse que o paciente sofre/recebe a ação?"]},
+   {tag:"apl",q:"No texto sobre leis, aparece: “Leis municipais são aprovadas pelas Câmaras Municipais”. O sujeito “Leis municipais” é ativo ou paciente? Justifique.",modelo:"É paciente: as leis não aprovam nada, elas recebem a ação de serem aprovadas (forma composta “são aprovadas”). Quem faz a ação são as Câmaras Municipais.",chk:["Classifiquei como sujeito paciente?","Expliquei que as leis recebem a ação e outra parte a realiza?"]},
+   {tag:"apl",q:"Reescreva na ordem canônica e aponte o sujeito paciente: “Foram encontradas evidências no laboratório.”",modelo:"“Evidências foram encontradas no laboratório.” Sujeito paciente: “evidências” (elas recebem a ação de serem encontradas).",chk:["Coloquei o sujeito no começo da frase?","Apontei “evidências” como sujeito paciente?"]}
+  ]
+ },
+ {
+  porto:"Ponte 9 · Agente da passiva", emoji:"🧩", u:"sau",
+  titulo:"Agente da passiva e voz passiva analítica",
+  texto:[
+   "Se o sujeito paciente sofre a ação, alguém precisa realizá-la. Esse alguém tem nome: <span class='destaque'>agente da passiva</span> — o termo que aparece numa oração na <b>voz passiva analítica</b> e indica <b>quem pratica a ação</b> que cai sobre o sujeito paciente.",
+   "<b>Voz passiva analítica:</b> o sujeito é paciente (sofre a ação) e o verbo é formado por um <b>verbo auxiliar</b> (geralmente o verbo <b>ser</b>) + o <b>particípio</b> do verbo principal (ex.: <b>foi escrito</b>, <b>são apresentadas</b>).",
+   "O quebra-cabeça do livro mostra a troca. Na ativa: “<b>Os alunos</b> escreveram <b>um artigo científico</b>.” Três peças mudam: o <b>objeto direto</b> vira <b>sujeito paciente</b>; o <b>verbo</b> vira uma <b>forma composta</b>; o <b>sujeito ativo</b> vira <b>agente da passiva</b>. Resultado: “<b>Um artigo científico</b> foi escrito <b>pelos alunos</b>.”",
+   "O agente da passiva <b>só aparece quando o sujeito é paciente</b> e, mesmo assim, pode não aparecer: ele é <span class='destaque'>facultativo</span> (opcional). Em “São apresentadas dificuldades...”, por exemplo, não aparece quem apresentou.",
+   "E por que trocar? Para dar <b>ênfase</b>. “Os alunos escreveram um artigo científico.” destaca <b>quem escreveu</b>. “Um artigo científico foi escrito pelos alunos.” coloca o <b>foco no artigo</b>."
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais são as três mudanças que acontecem quando passamos uma frase da voz ativa para a voz passiva analítica?",modelo:"O objeto direto vira sujeito paciente; o verbo vira uma forma composta (ser + particípio); o sujeito ativo vira agente da passiva.",chk:["Citei OD → sujeito paciente?","Citei verbo → forma composta e sujeito ativo → agente da passiva?"]},
+   {tag:"apl",q:"Passe para a voz passiva analítica e aponte o agente da passiva: “O Congresso Nacional aprova as leis federais.”",modelo:"“As leis federais são aprovadas pelo Congresso Nacional.” Agente da passiva: “pelo Congresso Nacional”.",chk:["Fiz a passiva com ser + particípio (são aprovadas)?","Apontei “pelo Congresso Nacional” como agente da passiva?"]},
+   {tag:"apl",q:"Um jornal quer dar destaque ao artigo, e não aos alunos. Qual versão deve usar? E na frase “São apresentadas dificuldades na avaliação da influência do cinema” aparece agente da passiva? Explique.",modelo:"Deve usar a voz passiva: “Um artigo científico foi escrito pelos alunos”, porque o foco fica no artigo. Na frase das dificuldades não aparece agente da passiva, porque ele é facultativo (opcional).",chk:["Escolhi a voz passiva para destacar o artigo?","Expliquei que o agente não aparece porque é facultativo?"]}
+  ]
+ },
+ {
+  porto:"Ponte 10 · Conjunções", emoji:"⚖️", u:"mic",
+  titulo:"Conjunções: as pontes entre as ideias",
+  texto:[
+   "No texto “O MPF fiscaliza o cumprimento das leis”, várias palavras aparecem em destaque: <b>também, e, quando, que, para que, se, como, porque, ou seja</b>... Elas têm a função de <b>unir duas ou mais palavras</b>, criando uma <b>relação de sentido</b> entre elas.",
+   "A palavra que relaciona outras palavras, determinando um sentido, chama-se <span class='destaque'>conjunção</span>. Exemplo: em “A única forma de uma lei <b>como</b> essa ser aprovada é alterando a constituição”, o “como” traz a ideia de <b>comparação</b>: compara a lei de pena de morte, citada antes, com “essa”.",
+   "O sentido de uma conjunção <b>depende do contexto</b>, por isso é importante ler o texto inteiro. Veja o “e”: em “Compreendi bem o que são os textos normativos <b>e</b> fui bem na prova!” há <b>adição</b> de ideias. Já em “Vi que as regras estavam coladas na porta, <b>e</b> acabei me esquecendo de conferir.” há <b>contradição</b>. Dizemos que o “e” tem <b>valor semântico</b> (relativo ao significado) diferente em cada frase.",
+   "As conjunções se dividem em dois grandes grupos, de acordo com a estrutura em que aparecem: <b>coordenativas</b> e <b>subordinativas</b>. O livro avisa que essa diferença vai ficar mais clara quando vocês estudarem o período composto.",
+   "<div class='olhar'><b>Na Cidade das Pontes:</b> as preposições ligam termos; as conjunções são as grandes pontes que ligam ideias inteiras.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"O que é uma conjunção e em quais dois grupos as conjunções se dividem?",modelo:"Conjunção é a palavra que relaciona outras palavras, determinando um sentido entre elas. Dividem-se em coordenativas e subordinativas.",chk:["Disse que a conjunção liga palavras criando um sentido?","Citei coordenativas e subordinativas?"]},
+   {tag:"apl",q:"No exercício do livro aparece: “Jonas assistiu ao filme, e não gostou de quase nada do roteiro...”. Que sentido o “e” tem nessa frase? Explique.",modelo:"Sentido de contradição (oposição): era de esperar que, assistindo ao filme, ele gostasse, mas não gostou. O “e” aqui funciona como um “mas”.",chk:["Disse que o sentido é de contradição?","Expliquei a oposição entre assistir e não gostar?"]},
+   {tag:"apl",q:"Crie duas frases suas com a conjunção “e”: uma com ideia de adição e outra com ideia de contradição.",modelo:"Adição: “Arrumei o quarto e lavei a louça.” Contradição: “Estudei a semana inteira, e mesmo assim esqueci a fórmula na hora.”",chk:["Fiz uma frase em que o “e” soma ideias?","Fiz uma frase em que o “e” mostra contradição?"]}
+  ]
+ },
+ {
+  porto:"Ponte 11 · Conjunções", emoji:"🔗", u:"mic",
+  titulo:"Conjunções coordenativas: as cinco pontes independentes",
+  texto:[
+   "As <span class='destaque'>conjunções coordenativas</span> são consideradas <b>independentes</b>, porque ligam palavras ou orações que são independentes entre si. Elas têm <b>cinco</b> classificações:",
+   "<ul><li><b>Aditivas</b> (adição): e, nem, não só... mas também, também — “Não fiz o que havia programado para hoje <b>nem</b> o que tinha que ser feito ontem.”</li><li><b>Adversativas</b> (contradição): mas, entretanto, porém, contudo — “Corri muito, <b>mas</b> não o suficiente para ganhar a maratona.”</li><li><b>Explicativas</b> (explicação): porque, pois, que — “Mari pediu logo o almoço, <b>porque</b> estava sem comer há horas.”</li><li><b>Conclusivas</b> (conclusão): por isso, logo, portanto, assim — “Lucas se esforçou bastante, <b>assim</b>, conseguiu o que queria.”</li><li><b>Alternativas</b> (alternância): ou... ou; ora... ora; quer... quer — “<b>Ou</b> você me diz a verdade, <b>ou</b> não seremos mais amigos.”</li></ul>",
+   "Usar a conjunção certa faz diferença. No exercício do livro: “Marcelo comprou uma blusa, <b>entretanto</b> gostou dela.” O “entretanto” é <b>adversativo</b> (contradição), mas comprar uma blusa e gostar dela não se contradizem! O uso <b>não está adequado</b>. Fica melhor com uma <b>aditiva</b>: “Marcelo comprou uma blusa <b>e</b> gostou dela.”",
+   "<div class='olhar'><b>Na Cidade das Pontes:</b> antes de escolher a ponte, veja que caminho as duas ideias fazem — somam, se opõem, explicam, concluem ou se alternam?</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Qual é a diferença de sentido entre uma conjunção explicativa e uma conclusiva?",modelo:"A explicativa traz uma explicação para o que foi dito (porque, pois, que). A conclusiva traz uma conclusão do que foi dito (por isso, logo, portanto, assim).",chk:["Disse que a explicativa explica?","Disse que a conclusiva conclui?"]},
+   {tag:"apl",q:"Classifique as conjunções destas frases do livro: (a) “Ora quer brincar, ora quer levar a sério.” (b) “Eram grandes amigos, logo foram padrinhos um do outro em seus casamentos.” (c) “Samuel foi à praia, mas não curtiu um dia de Sol.”",modelo:"(a) ora... ora: alternativa. (b) logo: conclusiva. (c) mas: adversativa.",chk:["Acertei (a) alternativa?","Acertei (b) conclusiva e (c) adversativa?"]},
+   {tag:"apl",q:"Junte as frases usando a conjunção pedida: (a) “Maya e Isis são irmãs. Não dividem o mesmo quarto.” (adversativa) (b) “Faltei ao trabalho. Estive bastante doente.” (explicativa)",modelo:"(a) “Maya e Isis são irmãs, mas não dividem o mesmo quarto.” (b) “Faltei ao trabalho, pois estive bastante doente.” (vale também “porque”).",chk:["Usei uma adversativa (mas, porém, entretanto, contudo) em (a)?","Usei uma explicativa (pois, porque, que) em (b)?"]}
+  ]
+ },
+ {
+  porto:"Ponte 12 · Conjunções", emoji:"🧭", u:"mic",
+  titulo:"Conjunções subordinativas: integrantes e adverbiais",
+  texto:[
+   "As <span class='destaque'>conjunções subordinativas</span> são diferentes das coordenativas pela <b>dependência</b>: os termos que elas ligam dependem um do outro. Elas se dividem em <b>integrantes</b> e <b>adverbiais</b>.",
+   "<b>Integrantes</b> — introduzem orações subordinadas substantivas: <b>“que”</b> e <b>“se”</b>. Exemplos: “Eu não sabia <b>que</b> você viria à reunião.” “Não tenho certeza <b>se</b> eles conseguirão terminar o trabalho a tempo.”",
+   "<b>Adverbiais</b> — criam uma relação de valor adverbial entre as partes. São <b>nove</b>:",
+   "<ul><li><b>Causal</b> (causa): porque, como.</li><li><b>Concessiva</b> (exceção): embora, ainda que, por mais que.</li><li><b>Comparativa</b> (comparação): tanto quanto, assim como, como.</li><li><b>Condicional</b> (condição): se, caso, salvo que, contanto que.</li><li><b>Conformativa</b> (conformidade): conforme, segundo.</li><li><b>Consecutiva</b> (consequência): de modo que, tanto [...] que, tanto que.</li><li><b>Proporcional</b> (proporção): à medida que, quanto mais/menos, à proporção que.</li><li><b>Temporal</b> (tempo): quando, assim que, até que, logo que.</li><li><b>Final</b> (finalidade, motivo): para que, a fim de que.</li></ul>",
+   "<div class='olhar'><b>Olho vivo:</b> algumas palavras aparecem em mais de uma lista — “porque” (explicativa e causal), “como” (causal e comparativa), “se” (integrante e condicional). É o contexto que decide.</div>"
+  ],
+  perguntas:[
+   {tag:"conc",q:"Quais são os dois tipos de conjunções subordinativas e que palavras o livro dá como integrantes?",modelo:"Integrantes e adverbiais. As integrantes são “que” e “se”, que introduzem orações subordinadas substantivas.",chk:["Citei integrantes e adverbiais?","Citei “que” e “se” como integrantes?"]},
+   {tag:"apl",q:"Classifique as conjunções em destaque no texto do MPF: (a) “QUANDO as pessoas fazem uma denúncia ao MPF...”; (b) “...levam o caso ao poder Judiciário, PARA QUE os culpados sejam punidos”; (c) “SE uma prefeitura não repassa para às escolas o dinheiro...”.",modelo:"(a) quando: temporal (tempo). (b) para que: final (finalidade). (c) se: condicional (condição).",chk:["Acertei (a) temporal?","Acertei (b) final e (c) condicional?"]},
+   {tag:"apl",q:"Escreva uma frase com conjunção concessiva e outra com conjunção consecutiva (use as palavras da lista do livro) e diga o sentido de cada uma.",modelo:"Concessiva: “Embora estivesse cansado, terminei a lição.” (ideia de exceção/concessão). Consecutiva: “Choveu tanto que a rua alagou.” (ideia de consequência).",chk:["Usei uma concessiva da lista (embora, ainda que, por mais que)?","Usei uma consecutiva da lista (de modo que, tanto que, tanto... que)?"]}
+  ]
+ }
+];
+
+/* ====== ESTADO E PERSISTÊNCIA ====== */
+var CHAVE=KIT+'_leitura_v1';
+var mem={};
+var estado=carregar();
+
+function carregar(){
+  try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s); }catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); }
+  return {blocos:{}};
+}
+function calcProgresso(){
+  var conf=0, chkPend=0;
+  BLOCOS.forEach(function(bloco,i){
+    var b=estado.blocos[i]; if(!b||!b.conferido) return; conf++;
+    bloco.perguntas.forEach(function(p,j){ var ep=(b.perguntas&&b.perguntas[j])||{chk:{}}; p.chk.forEach(function(pt,k){ if(!ep.chk||!ep.chk[k]) chkPend++; }); });
+  });
+  estado.progresso={conferidos:conf,total:BLOCOS.length,chkPendentes:chkPend};
+  if(conf===BLOCOS.length && chkPend===0){ if(!estado.concluido){ estado.concluido=true; estado.concluidoEm=new Date().toISOString(); } }
+  return estado.progresso;
+}
+function salvar(){
+  calcProgresso();
+  var s=JSON.stringify(estado);
+  try{ localStorage.setItem(CHAVE,s); }catch(e){ mem[CHAVE]=s; }
+  var d=new Date();
+  document.getElementById('salvo').textContent='💾 Salvo às '+d.toLocaleTimeString('pt-BR')+' de '+d.toLocaleDateString('pt-BR');
+  atualizarTrilhaFim();
+}
+function atualizarTrilhaFim(){
+  var p=estado.progresso||calcProgresso();
+  var box=document.getElementById('trilha-fim'), txt=document.getElementById('trilha-fim-txt'), btn=document.getElementById('btn-prox');
+  var h3=box.querySelector('h3');
+  if(estado.concluido||trilhaLiberada()){
+    h3.textContent='✅ Leitura concluída — Quiz destravado!';
+    txt.textContent=estado.concluido?'Você atravessou as 12 pontes e respondeu a autoavaliação. Agora teste o que aprendeu.':'Trilha liberada pelos pais.';
+    btn.classList.remove('off');
+  } else {
+    h3.textContent='🔒 Próxima etapa: Quiz';
+    var faltam=p.total-p.conferidos;
+    txt.textContent=faltam>0 ? 'Destrava quando você conferir as '+p.total+' pontes (faltam '+faltam+').' : 'Falta responder a autoavaliação Sim/Não de '+p.chkPendentes+' ponto(s) para destravar.';
+    btn.classList.add('off');
+  }
+  marcarNav();
+  desenharTorre();
+}
+function desenharTorre(){
+  var t=document.getElementById('torre'); if(!t) return; var h='';
+  var atualMarcado=false;
+  BLOCOS.forEach(function(b,i){ var e=estado.blocos[i]; var cls=''; var ic='🔒';
+    if(e&&e.conferido){ cls='ok'; ic='✅'; } else if(!atualMarcado && (i===0 || (estado.blocos[i-1]&&estado.blocos[i-1].conferido))){ cls='atual'; ic='🏮'; atualMarcado=true; }
+    h+='<div class="'+cls+'">'+ic+' Ponte '+(i+1)+'</div>'; });
+  t.innerHTML=h;
+}
+function estBloco(i){ if(!estado.blocos[i]) estado.blocos[i]={aberto:i===0,conferido:false,perguntas:{}}; return estado.blocos[i]; }
+function estPerg(i,j){ var b=estBloco(i); if(!b.perguntas[j]) b.perguntas[j]={resp:'',warned:false,red:false,tentou:'',chk:{}}; return b.perguntas[j]; }
+
+/* ====== ANTICÓPIA (motor validado — Português 7º, 08/10/2026; reaproveitado sem mudança) ====== */
+function normPal(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/<[^>]*>/g,' ').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);
+}
+function maiorRun(aw,bw){
+  var bStr=' '+bw.join(' ')+' ', best=0;
+  for(var i=0;i<aw.length;i++){
+    for(var len=aw.length-i; len>0; len--){
+      var sub=aw.slice(i,i+len).join(' ');
+      if(bStr.indexOf(' '+sub+' ')>=0){ if(len>best)best=len; break; }
+    }
+  }
+  return best;
+}
+function cobertoPorRuns(aw,bw,minRun){
+  var bStr=' '+bw.join(' ')+' ', cov=new Array(aw.length).fill(false);
+  for(var i=0;i<aw.length;i++){
+    for(var len=aw.length-i; len>=minRun; len--){
+      var sub=aw.slice(i,i+len).join(' ');
+      if(bStr.indexOf(' '+sub+' ')>=0){ for(var k=i;k<i+len;k++)cov[k]=true; break; }
+    }
+  }
+  return cov.filter(Boolean).length;
+}
+function ehCopia(resp, textoBloco, pergunta){
+  var a=normPal(resp), src=normPal(textoBloco), q=normPal(pergunta);
+  if(a.length<5) return false;
+  var qStr=' '+q.join(' ')+' ', keep=new Array(a.length).fill(true);
+  for(var i=0;i<a.length;i++){
+    for(var len=a.length-i; len>=4; len--){
+      var sub=a.slice(i,i+len).join(' ');
+      if(qStr.indexOf(' '+sub+' ')>=0){ for(var k=i;k<i+len;k++)keep[k]=false; break; }
+    }
+  }
+  var af=a.filter(function(w,idx){return keep[idx];});
+  if(af.length<5) return false;
+  var run=maiorRun(af,src);
+  var cov=cobertoPorRuns(af,src,5);
+  var ratio=cov/af.length;
+  return run>=8 || ratio>0.6;
+}
+
+/* ====== RENDER ====== */
+function textoPlano(bloco){ return bloco.texto.join(' '); }
+function irBloco(i){ var el=document.getElementById('bloco'+i); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+function render(){
+  var cont=document.getElementById('blocos'); cont.innerHTML='';
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i);
+    var div=document.createElement('div'); div.className='bloco '+bloco.u+(b.aberto?'':' travado'); div.id='bloco'+i;
+    var html='<div class="bloco-cab"><div class="num">'+(i+1)+'</div><div><div class="porto">'+bloco.porto+'</div><h3>'+bloco.emoji+' '+bloco.titulo+'</h3></div></div>';
+    if(!b.aberto){
+      html+='<div class="cadeado">🔒 Esta ponte só baixa quando você conferir a ponte anterior.</div>';
+      div.innerHTML=html; cont.appendChild(div); return;
+    }
+    html+='<div class="bloco-corpo"><div class="texto">';
+    bloco.texto.forEach(function(p){ html+= (p.indexOf('<div')===0 || p.indexOf('<ul')===0 ? p : '<p>'+p+'</p>'); });
+    html+='</div>';
+    bloco.perguntas.forEach(function(p,j){
+      var ep=estPerg(i,j);
+      var tagTxt=p.tag==='conc'?'Conceito':'Aplicação';
+      html+='<div class="perg'+(ep.red?' red':'')+'" id="perg'+i+'_'+j+'">';
+      html+='<span class="tag '+p.tag+'">'+tagTxt+'</span>';
+      html+='<label>'+(j+1)+'. '+p.q+'</label>';
+      html+='<textarea id="ta'+i+'_'+j+'" oninput="digitou('+i+','+j+')">'+(ep.resp||'').replace(/</g,'&lt;')+'</textarea>';
+      html+='<div class="aviso" id="av'+i+'_'+j+'"></div>';
+      html+='<div class="modelo" id="mod'+i+'_'+j+'"><span class="lab">Resposta-modelo</span><p>'+p.modelo+'</p>';
+      html+='<div class="chk" id="chk'+i+'_'+j+'"></div></div>';
+      html+='</div>';
+    });
+    html+='<button class="conferir" id="conf'+i+'" onclick="conferir('+i+')">✔️ Conferir esta ponte</button>';
+    html+='<div class="status-bloco" id="st'+i+'"></div>';
+    if(i<BLOCOS.length-1){ html+='<div class="prox" id="px'+i+'"></div>'; }
+    html+='</div>';
+    div.innerHTML=html;
+    cont.appendChild(div);
+  });
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i);
+    if(b.aberto && b.conferido){ mostrarConferido(i); }
+    atualizarBotao(i);
+  });
+  atualizarRelatorio();
+  atualizarTrilhaFim();
+}
+
+function digitou(i,j){
+  var ep=estPerg(i,j);
+  ep.resp=document.getElementById('ta'+i+'_'+j).value;
+  if(ep.red){
+    var bloco=BLOCOS[i];
+    if(!ehCopia(ep.resp, textoPlano(bloco), bloco.perguntas[j].q)){
+      ep.red=false;
+      var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.remove('red');
+      var av=document.getElementById('av'+i+'_'+j); if(av){av.className='aviso'; av.textContent='';}
+    }
+  }
+  atualizarBotao(i);
+  salvar();
+  atualizarRelatorio();
+}
+
+function atualizarBotao(i){
+  var b=estBloco(i); if(!b.aberto) return;
+  var btn=document.getElementById('conf'+i); if(!btn) return;
+  if(b.conferido){ btn.textContent='✔️ Ponte conferida'; btn.disabled=true; return; }
+  var todas=true;
+  BLOCOS[i].perguntas.forEach(function(p,j){
+    var v=(document.getElementById('ta'+i+'_'+j)||{}).value||estPerg(i,j).resp||'';
+    if(v.trim().length<3) todas=false;
+  });
+  btn.disabled=!todas;
+}
+
+function conferir(i){
+  var bloco=BLOCOS[i], b=estBloco(i);
+  var algumBloqueado=false;
+  bloco.perguntas.forEach(function(p,j){
+    var ep=estPerg(i,j);
+    ep.resp=document.getElementById('ta'+i+'_'+j).value;
+    var av=document.getElementById('av'+i+'_'+j);
+    var copia=ehCopia(ep.resp, textoPlano(bloco), p.q);
+    if(copia){
+      if(!ep.warned || ep.resp===ep.tentou){
+        if(!ep.warned){ ep.warned=true; ep.tentou=ep.resp; }
+        av.className='aviso amarelo';
+        av.innerHTML='✋ Boa parte da sua resposta está igual ao texto. Tente <b>reescrever com as suas palavras</b> — explique como se fosse para um amigo, sem olhar o texto. Pode ficar mais curto e simples: o que vale é ser <b>SEU</b>.';
+        algumBloqueado=true;
+      } else {
+        ep.red=true;
+        av.className='aviso vermelho';
+        av.innerHTML='🔴 Esta resposta continua muito parecida com o texto. Ela foi aceita, mas ficou marcada para revisar. Se reescrever com as suas palavras, a marca some.';
+        document.getElementById('perg'+i+'_'+j).classList.add('red');
+      }
+    } else {
+      ep.red=false;
+      if(av){ av.className='aviso'; av.textContent=''; }
+      var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.remove('red');
+    }
+  });
+  salvar();
+  if(algumBloqueado){
+    document.getElementById('st'+i).innerHTML='<span style="color:var(--limao)">✍️ Reescreva as respostas marcadas em amarelo (mude o que escreveu) e clique em Conferir de novo.</span>';
+    return;
+  }
+  b.conferido=true;
+  if(i<BLOCOS.length-1){ estBloco(i+1).aberto=true; }
+  salvar();
+  render();
+  var alvo=document.getElementById('bloco'+i);
+  if(alvo) alvo.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function mostrarConferido(i){
+  var bloco=BLOCOS[i];
+  bloco.perguntas.forEach(function(p,j){
+    var ep=estPerg(i,j);
+    var mod=document.getElementById('mod'+i+'_'+j); if(mod) mod.classList.add('show');
+    if(ep.red){ var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.add('red');
+      var av=document.getElementById('av'+i+'_'+j); if(av){av.className='aviso vermelho'; av.innerHTML='🔴 Resposta marcada para revisar (muito parecida com o texto). Reescreva com as suas palavras para tirar a marca.';}
+    }
+    var chk=document.getElementById('chk'+i+'_'+j); if(chk){
+      var h='<b style="font-size:.8rem;color:#a8f0d4">Confira você: a sua resposta…</b>';
+      p.chk.forEach(function(pt,k){
+        var val=ep.chk[k]||'';
+        h+='<div class="item"><span>'+pt+'</span><span class="simnao">'
+         +'<button class="sim'+(val==='sim'?' ativo':'')+'" onclick="marcarChk('+i+','+j+','+k+',\'sim\')">Sim</button>'
+         +'<button class="nao'+(val==='nao'?' ativo':'')+'" onclick="marcarChk('+i+','+j+','+k+',\'nao\')">Não</button>'
+         +'</span></div>';
+      });
+      chk.innerHTML=h;
+    }
+  });
+  atualizarStatusBloco(i);
+  var btn=document.getElementById('conf'+i); if(btn){ btn.textContent='✔️ Ponte conferida'; btn.disabled=true; }
+  if(i<BLOCOS.length-1){
+    var px=document.getElementById('px'+i);
+    if(px) px.innerHTML='<a href="#bloco'+(i+1)+'" onclick="irBloco('+(i+1)+');return false;">➡️ Atravessar para a próxima ponte</a>';
+  }
+}
+
+function marcarChk(i,j,k,val){
+  var ep=estPerg(i,j); ep.chk[k]=val;
+  salvar(); mostrarConferido(i); atualizarStatusBloco(i); atualizarRelatorio();
+}
+
+function statusPergunta(i,j){
+  var ep=estPerg(i,j), p=BLOCOS[i].perguntas[j];
+  if(ep.red) return 'revisar';
+  var temNao=false, todasResp=true;
+  p.chk.forEach(function(pt,k){ if(ep.chk[k]==='nao') temNao=true; if(!ep.chk[k]) todasResp=false; });
+  if(temNao) return 'revisar';
+  if(!todasResp) return 'pendente';
+  return 'ok';
+}
+function atualizarStatusBloco(i){
+  var st=document.getElementById('st'+i); if(!st) return;
+  var revisar=false, pendente=false;
+  BLOCOS[i].perguntas.forEach(function(p,j){ var s=statusPergunta(i,j); if(s==='revisar')revisar=true; if(s==='pendente')pendente=true; });
+  if(revisar) st.innerHTML='<span style="color:#ffbcb5">🔁 Esta ponte tem pontos para revisar.</span>';
+  else if(pendente) st.innerHTML='<span style="color:var(--limao)">📝 Responda a autoavaliação (Sim/Não) de cada pergunta.</span>';
+  else st.innerHTML='<span style="color:#a8f0d4">✅ Ponte atravessada com sucesso!</span>';
+  atualizarRelatorio();
+}
+
+function atualizarRelatorio(){
+  var lista=[], totalConf=0, totalRed=0, totalNao=0;
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i); if(!b.conferido) return; totalConf++;
+    bloco.perguntas.forEach(function(p,j){
+      var ep=estPerg(i,j);
+      if(ep.red){ totalRed++; lista.push('Ponte '+(i+1)+' ('+bloco.titulo+'): pergunta '+(j+1)+' — resposta muito parecida com o texto.'); }
+      p.chk.forEach(function(pt,k){ if(ep.chk[k]==='nao'){ totalNao++; lista.push('Ponte '+(i+1)+' ('+bloco.titulo+'): revisar — "'+pt+'"'); } });
+    });
+  });
+  var rev=document.getElementById('revisar'), rl=document.getElementById('revisar-lista');
+  if(lista.length){ rev.style.display='block'; rl.innerHTML=lista.map(function(x){return '<li>'+x+'</li>';}).join(''); }
+  else { rev.style.display='none'; rl.innerHTML=''; }
+  var rc=document.getElementById('rel-conteudo');
+  rc.innerHTML='<b>Pontes conferidas:</b> '+totalConf+' de '+BLOCOS.length+'.<br>'
+    +'<b>Respostas marcadas (muito parecidas com o texto):</b> '+totalRed+'.<br>'
+    +'<b>Pontos marcados como "Não" na autoavaliação:</b> '+totalNao+'.<br>'
+    +(lista.length? '<span style="color:#ffbcb5">Há '+lista.length+' ponto(s) para revisar (lista acima).</span>' : '<span style="color:#a8f0d4">Sem pontos pendentes para revisar. 👏</span>');
+}
+
+/* ====== EXPORTAR / IMPORTAR / ZERAR ====== */
+function exportar(){
+  var dados=JSON.stringify(estado,null,2);
+  var blob=new Blob([dados],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='leitura-guiada_cidade-das-pontes.json'; a.click();
+}
+function importar(ev){
+  var f=ev.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){ try{ estado=JSON.parse(r.result); salvar(); render(); mostrarModal('✅ Progresso importado!',false); }catch(e){ mostrarModal('❌ Arquivo inválido.',false); } };
+  r.readAsText(f);
+}
+var acaoZerar=null;
+function pedirZerar(){ acaoZerar=true; mostrarModal('Tem certeza que quer apagar TODO o progresso desta leitura? (O Quiz continua destravado se já tiver sido destravado.)',true); }
+function mostrarModal(txt,confirmar){
+  document.getElementById('modal-txt').innerHTML=txt;
+  document.getElementById('modal').classList.add('show');
+  document.getElementById('modal-cancel').style.display=confirmar?'inline-block':'none';
+  document.getElementById('modal-ok').textContent=confirmar?'Sim, apagar':'Ok';
+  document.getElementById('modal-ok').onclick=function(){ if(confirmar && acaoZerar){ var c=estado.concluido, ce=estado.concluidoEm; estado={blocos:{}}; if(c){estado.concluido=true; estado.concluidoEm=ce;} salvar(); render(); } acaoZerar=null; fecharModal(); };
+}
+function fecharModal(){ document.getElementById('modal').classList.remove('show'); }
+
+render();
+</script>
+</body>
+</html>

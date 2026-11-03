@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado · Cidade das Pontes · Português 7º</title>
+<style>
+  :root{--fundo:#0b1822;--fundo2:#11233a;--borda:#1f3a52;--borda2:#2c5070;--verde:#4fd8a6;--magenta:#b9a3ff;--laranja:#f6b443;--limao:#ffd166;--vermelho:#e0403f;--azul:#13244a;--texto:#eef4f8;--cinza:#93a9bb}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Trebuchet MS',Verdana,'Segoe UI',sans-serif;background:radial-gradient(900px 420px at 50% -8%,#14284a,#0b1822 62%),var(--fundo);color:var(--texto);line-height:1.6;padding-bottom:60px;font-size:17px}
+  header{background:linear-gradient(120deg,#0e1a38,#13244a);padding:26px 18px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:6px solid var(--vermelho)}
+  header .selo{font-size:.76rem;letter-spacing:2px;color:#c9d6f5;text-transform:uppercase}
+  header h1{font-size:1.5rem;margin:6px 0 2px}
+  header p{color:#dbe4fa;font-size:.92rem}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .barra-nav a{background:var(--fundo2);color:var(--texto);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:.85rem;border:1px solid var(--borda)}
+  .barra-nav a.on{background:var(--vermelho);color:#fff;font-weight:bold}
+  .intro{background:var(--fundo2);border:1px solid var(--borda);border-radius:14px;padding:16px;margin-bottom:16px}
+  .intro h2{color:#ff8a89;font-size:1.1rem;margin-bottom:8px}
+  .painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--fundo2);border:1px solid var(--borda);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+  .painel .btns{display:flex;gap:6px;flex-wrap:wrap}
+  button{cursor:pointer;font-family:inherit}
+  .mini{background:var(--fundo);color:var(--texto);border:1px solid var(--borda2);border-radius:8px;padding:6px 10px;font-size:.8rem}
+  .codigo{background:linear-gradient(120deg,#0f3a32,#145040);border:2px solid var(--verde);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px;display:none;position:sticky;top:6px;z-index:5}
+  .codigo.show{display:block}
+  .codigo .cod{font-size:1.8rem;font-weight:bold;letter-spacing:3px;color:#a8f0d4;margin:6px 0}
+  .progresso{height:10px;background:var(--borda);border-radius:6px;overflow:hidden;margin-bottom:16px}
+  .progresso div{height:100%;background:var(--vermelho);width:0;transition:width .3s}
+  .q{background:var(--fundo2);border:1px solid var(--borda);border-radius:16px;padding:16px;margin-bottom:14px}
+  .q .num{color:#ff8a89;font-weight:bold;font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
+  .q .tipo{float:right;font-size:.7rem;color:#fff;border-radius:10px;padding:2px 8px;background:#2a3a5a}
+  .q .tipo.som{background:#5a2a7a}.q .tipo.rom{background:#1f5a4a}.q .tipo.dis{background:#7a3a1a}
+  .q h3{font-size:1rem;margin:6px 0 10px;font-weight:600}
+  .txt{background:#0f1f30;border:1px solid #2c5070;border-left:4px solid #f6b443;border-radius:0 10px 10px 0;padding:10px 12px;margin:4px 0 12px;font-weight:normal;font-size:.93rem;line-height:1.6}
+  .txt small{display:block;margin-top:6px;color:#93a9bb;font-size:.75rem}
+  .afirm{background:#0f1f30;border-left:3px solid var(--borda2);padding:8px 12px;margin:6px 0;border-radius:0 8px 8px 0;font-size:.94rem}
+  .afirm.ok{border-left-color:var(--verde)}.afirm.no{border-left-color:#777;color:#aaa}
+  .alt{display:block;background:#0f1f30;border:1px solid var(--borda2);border-radius:10px;padding:10px 12px;margin:6px 0;cursor:pointer}
+  .alt:hover{border-color:#ff8a89}
+  .alt input{margin-right:8px}
+  .alt.sel{border-color:#ff8a89;background:#2a1a1c}
+  .alt.certa{border-color:var(--verde);background:#10302a}
+  .alt.errada{border-color:#555;background:#141c24;color:#aaa}
+  .alt.marcada-errada{border-color:var(--vermelho);background:#3a1818}
+  .exp{margin-top:8px;font-size:.88rem;padding:8px 10px;border-radius:8px;background:#0f1f30;border-left:3px solid var(--limao);display:none}
+  .exp.show{display:block}
+  .soma input{width:110px;padding:9px;border-radius:8px;border:1px solid var(--borda2);background:#0a1520;color:var(--texto);font-size:1.05rem;text-align:center}
+  .soma .lab{font-size:.85rem;color:var(--cinza);margin-left:8px}
+  .q textarea{width:100%;min-height:120px;background:#0a1520;color:var(--texto);border:1px solid var(--borda2);border-radius:8px;padding:9px;font-family:inherit;font-size:.95rem;margin-top:6px}
+  .modelo{display:none;margin-top:10px;padding:10px 12px;background:#10302a;border:1px solid var(--verde);border-radius:8px;font-size:.9rem}
+  .modelo.show{display:block}
+  .enviar{width:100%;background:var(--vermelho);color:#fff;border:none;border-radius:12px;padding:14px;font-size:1.05rem;font-weight:bold;margin:10px 0}
+  .enviar:disabled{background:#1c2b3a;color:#6d8296;cursor:not-allowed}
+  .gab{background:var(--fundo2);border:1px dashed var(--magenta);border-radius:14px;padding:16px;margin:16px 0;display:none}
+  .gab.show{display:block}
+  .gab input{padding:9px;border-radius:8px;border:1px solid var(--borda2);background:#0a1520;color:var(--texto);font-size:1rem;width:180px;text-transform:uppercase}
+  .gab button{background:var(--magenta);color:#1c1240;border:none;border-radius:8px;padding:9px 14px;font-weight:bold;margin-left:6px}
+  .gab .msg{margin-top:8px;font-size:.9rem}
+  .fim{background:linear-gradient(120deg,#0f3a32,#12443a);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:18px;text-align:center}
+  .fim h3{color:#a8f0d4;margin-bottom:8px}
+  .fim a{display:inline-block;margin-top:8px;background:var(--verde);color:#062a1e;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:10px}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(10,6,12,.97);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--fundo2);border:1px solid var(--vermelho);border-radius:14px;padding:22px;max-width:440px;text-align:center}
+  .modal p{margin-bottom:14px}
+  .modal .big{font-size:2.2rem}
+  .modal a,.modal button{display:inline-block;background:var(--vermelho);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-weight:bold;text-decoration:none}
+  .rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Colégio Legado · Português · 7º ano · Cidade das Pontes</div>
+  <h1>📝 Simulado — A Grande Travessia</h1>
+  <p>28 questões no estilo da prova · múltipla escolha, somatório, números romanos e discursiva · Código SIM</p>
+</header>
+
+<div class="wrap">
+  <nav class="barra-nav" id="nav">
+    <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html">🎯 Quiz</a>
+    <a href="resumo.html">🗺️ Resumo</a>
+    <a class="on" href="simulado.html">📝 Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </nav>
+
+  <div class="codigo" id="codigo"><div>Seu código de liberação</div><div class="cod" id="cod"></div><div id="codtxt"></div></div>
+
+  <div class="intro">
+    <h2>📝 Valendo!</h2>
+    <p>Faça como se fosse a prova: <b>28 questões</b>, todas obrigatórias. Nas de <b>somatório</b>, some os números das afirmativas corretas. Nas de <b>números romanos</b>, leia as afirmativas I, II, III e IV e escolha a alternativa certa. Na <b>discursiva</b>, escreva com as suas palavras (os pais corrigem com a resposta-modelo do gabarito). Depois de enviar, as respostas travam e sai o código <b>SIM</b>.</p>
+  </div>
+
+  <div class="painel">
+    <span id="salvo">💾 Progresso salvo automaticamente.</span>
+    <div class="btns">
+      <button class="mini" onclick="exportar()">📥 Exportar</button>
+      <button class="mini" onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button class="mini" onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+
+  <div class="progresso"><div id="barra"></div></div>
+  <div id="questoes"></div>
+  <button class="enviar" id="btn-enviar" onclick="enviar()" disabled>📨 Enviar simulado (responda todas)</button>
+
+  <div class="gab" id="gab">
+    <b>🔑 Gabarito comentado:</b> digite o código SIM que apareceu no topo.<br>
+    <input id="gab-in" placeholder="SIM-XX-YY"><button onclick="abrirGab()">Ver gabarito</button>
+    <div class="msg" id="gab-msg"></div>
+  </div>
+
+  <div class="fim" id="fim" style="display:none">
+    <h3>🏁 Trilha completa — todas as pontes atravessadas!</h3>
+    <p>Você percorreu os quatro materiais na ordem. Agora tudo fica aberto para revisar quantas vezes quiser até a prova.</p>
+    <a href="index.html">🏠 Voltar ao início</a>
+  </div>
+
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 🌉🏮 Boa prova!</div>
+</div>
+
+<div class="modal-bg" id="lock">
+  <div class="modal">
+    <div class="big">🔒</div>
+    <p><b>Esta etapa ainda está trancada.</b></p>
+    <p id="lock-txt">Para abrir o Simulado, leia o Resumo até o fim.</p>
+    <a href="index.html">Voltar ao início</a>
+  </div>
+</div>
+<div class="modal-bg" id="modal" style="background:rgba(0,0,0,.75)">
+  <div class="modal">
+    <p id="modal-txt"></p>
+    <button onclick="fecharModal()" id="modal-ok">Ok</button>
+    <button class="mini" onclick="fecharModal()" id="modal-cancel" style="display:none;margin-left:8px">Cancelar</button>
+  </div>
+</div>
+
+<script>
+/* ====== TRILHA COM CADEADOS (módulo comum do kit) ====== */
+var KIT='cidade_pontes';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Guiada', arquivo:'leitura-guiada.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function checarTrava(){
+  if(podeAbrir('simulado')) return true;
+  var txt='Para abrir o Simulado, leia o Resumo até o fim e clique em "Li o resumo até o fim".';
+  if(!etapaConcluida('quiz')) txt='Para abrir o Simulado, envie o Quiz e leia o Resumo até o fim.';
+  if(!etapaConcluida('leitura')) txt='Para abrir o Simulado, conclua a Leitura Guiada, envie o Quiz e leia o Resumo até o fim.';
+  document.getElementById('lock-txt').textContent=txt;
+  document.getElementById('lock').classList.add('show');
+  document.querySelector('.wrap').style.filter='blur(8px)';
+  document.querySelector('.wrap').setAttribute('aria-hidden','true');
+  return false;
+}
+
+/* ====== QUESTÕES (livro Bernoulli Língua Portuguesa 7º — Cap. 9 pp. 27-35 e Cap. 10 pp. 93-98, das fotos; textos de interpretação = textos do livro) — correta guardada pelo id ====== */
+var TXT_IBGE="<div class='txt'><b>O uso do celular e da Internet pelas crianças</b><br>Você sabia que a cada 100 pessoas no Brasil com mais de 10 anos de idade, cerca de 85 acessaram a Internet em 2021? Pois é! A pesquisa do IBGE nos mostra que cada vez mais pessoas usam a Internet no seu dia a dia. [...]<br>A cada 100 crianças com idade entre 10 e 13 anos, pelo menos 82 utilizaram a Internet durante o período da pesquisa. E você sabe qual é o equipamento mais utilizado para navegar na Internet? Se pensou no telefone celular, acertou! Praticamente 99 entre 100 pessoas pesquisadas revelaram que preferem usar o celular à televisão, computador ou <i>tablet</i>, por exemplo. Além disso, a pesquisa nos mostrou que o principal objetivo das pessoas com mais de 10 anos de idade em utilizar a Internet é conversar por chamadas de voz ou vídeo e o segundo maior é enviar ou receber mensagens de texto, voz ou imagens.<br>E você? Costuma usar muito o celular e a Internet?<small>IBGE. O uso do celular e da Internet pelas crianças. IBGE Educa. [Fragmento] — texto do livro, p. 35</small></div>";
+var TXT_MPF="<div class='txt'><b>O MPF fiscaliza o cumprimento das leis</b> (trechos)<br>No Brasil, existem leis federais, que são aprovadas pelo Congresso Nacional. Há também as leis estaduais, feitas pelas Assembleias Legislativas [...]. Leis municipais são aprovadas pelas Câmaras Municipais e leis distritais vêm da Câmara Legislativa do Distrito Federal. [...]<br>Outro exemplo: a nossa Constituição não permite a pena de morte. Portanto, o Congresso Nacional não pode criar uma lei instituindo essa penalidade, porque senão ela seria considerada inconstitucional e inválida. [...]<br>Se qualquer pessoa perceber que uma lei é inconstitucional, ou seja, desobedece a nossa Constituição, ele pode fazer uma representação (denúncia) ao MPF. Após averiguar o que foi relatado, se o MPF concordar que há desrespeito à Constituição, ele solicita ao Poder Judiciário [...] a anulação da lei.<small>MINISTÉRIO PÚBLICO FEDERAL; SECOM. Turminha do MPF. [Fragmento] — texto do livro, p. 93</small></div>";
+var TXT_LEIS="<div class='txt'><b>Código de Defesa do Consumidor</b> — conjunto de leis feito para proteção do indivíduo quando há uma compra. [...] Seu objetivo é equilibrar as relações entre consumidores e vendedores, tornando as transações comerciais mais seguras e justas para todos.<br><b>Código Brasileiro de Trânsito</b> — leis que organizam como o trânsito funciona no Brasil. [...] Trata desde comportamentos adequados no trânsito até questões como fiscalização, multas e penalidades.<br><b>Estatuto da Criança e do Adolescente (ECA)</b> — lei que cuida dos direitos das crianças e dos adolescentes no Brasil, com regras especiais para garantir que esses jovens tenham saúde, educação e proteção adequadas [...].<small>Boxes do livro, p. 93 (trechos)</small></div>";
+var TXT_ART="<div class='txt'><b>Art. 73.</b> Os órgãos ou entidades pertencentes ao Sistema Nacional de Trânsito têm o dever de analisar as solicitações e responder, por escrito, dentro de prazos mínimos, sobre a possibilidade ou não de atendimento [...].<small>BRASIL. Lei nº 9.503, de 23 de setembro de 1997. Código de Trânsito Brasileiro. [Fragmento] — livro, p. 96</small></div>";
+var TXT_CINE="<div class='txt'>Este artigo explora alguns dos vínculos entre a ciência e o cinema: o uso de filmes como instrumento de observação, material didático de educação científica e, principalmente, meio de expressão e veículo formador do imaginário social acerca da ciência. [...] São apresentadas dificuldades na avaliação da influência do cinema no imaginário científico [...].<small>OLIVEIRA, B. J. Cinema e imaginário científico. [Fragmento] — livro, p. 33</small></div>";
+var Q=[
+ {tipo:"mc",p:TXT_IBGE+"De acordo com o texto, a cada 100 crianças com idade entre 10 e 13 anos:",alts:[
+  {id:"a",t:"pelo menos 82 utilizaram a Internet durante o período da pesquisa.",ok:true,e:"É o dado do 2º parágrafo."},
+  {id:"b",t:"cerca de 85 acessaram a Internet em 2021.",e:"Esse número (85) se refere às pessoas com MAIS de 10 anos, não às crianças de 10 a 13."},
+  {id:"c",t:"praticamente 99 preferem o computador.",e:"99 em 100 pessoas preferem o CELULAR, não o computador."},
+  {id:"d",t:"todas usaram a Internet todos os dias.",e:"O texto não diz isso."}]},
+ {tipo:"mc",p:"Ainda sobre o texto do IBGE: segundo a pesquisa, qual é o principal objetivo das pessoas com mais de 10 anos em utilizar a Internet?",alts:[
+  {id:"a",t:"Conversar por chamadas de voz ou vídeo.",ok:true,e:"O texto diz que esse é o principal objetivo."},
+  {id:"b",t:"Enviar ou receber mensagens de texto, voz ou imagens.",e:"Esse é o SEGUNDO maior objetivo, não o principal."},
+  {id:"c",t:"Assistir a filmes.",e:"O texto não cita esse objetivo."},
+  {id:"d",t:"Fazer pesquisas escolares.",e:"O texto não cita esse objetivo."}]},
+ {tipo:"mc",p:"No trecho “A pesquisa do IBGE nos mostra que cada vez mais pessoas usam <u>a Internet</u> no seu dia a dia”, o termo sublinhado completa o verbo “usam”. Ele é:",alts:[
+  {id:"a",t:"objeto direto, pois se liga ao verbo sem preposição.",ok:true,e:"Usam o quê? a Internet — sem preposição: objeto direto."},
+  {id:"b",t:"objeto indireto, pois vem depois do verbo.",e:"O que define o objeto indireto é a preposição, que aqui não existe."},
+  {id:"c",t:"complemento nominal de “pessoas”.",e:"Ele completa o verbo “usam”, não um nome."},
+  {id:"d",t:"agente da passiva.",e:"A oração está na voz ativa (não há ser + particípio)."}]},
+ {tipo:"mc",p:"“E você sabe qual é o equipamento mais utilizado para navegar na Internet? <u>Se</u> pensou no telefone celular, acertou!” A conjunção sublinhada expressa:",alts:[
+  {id:"a",t:"condição — é subordinativa adverbial condicional.",ok:true,e:"Acertar depende da condição de ter pensado no celular. Condicionais: se, caso, salvo que, contanto que."},
+  {id:"b",t:"alternância — é coordenativa alternativa.",e:"Alternativas são “ou... ou”, “ora... ora”, “quer... quer”."},
+  {id:"c",t:"contradição — é coordenativa adversativa.",e:"Não há oposição de ideias."},
+  {id:"d",t:"finalidade — é subordinativa adverbial final.",e:"Finais: para que, a fim de que."}]},
+ {tipo:"mc",p:TXT_MPF+"Qual alternativa resume corretamente uma informação do texto?",alts:[
+  {id:"a",t:"Se o MPF concordar que há desrespeito à Constituição, ele solicita ao Poder Judiciário a anulação da lei.",ok:true,e:"Está no último parágrafo."},
+  {id:"b",t:"O Congresso Nacional pode criar uma lei de pena de morte sem alterar a Constituição.",e:"O texto diz o contrário: a Constituição não permite a pena de morte."},
+  {id:"c",t:"As leis municipais são aprovadas pelo Congresso Nacional.",e:"Elas são aprovadas pelas Câmaras Municipais; o Congresso aprova as federais."},
+  {id:"d",t:"Somente procuradores podem denunciar uma lei inconstitucional.",e:"O texto diz que QUALQUER pessoa pode fazer a representação (denúncia) ao MPF."}]},
+ {tipo:"mc",p:"Em “Leis municipais são aprovadas <u>pelas Câmaras Municipais</u>”, o termo sublinhado é:",alts:[
+  {id:"a",t:"agente da passiva, pois indica quem pratica a ação sofrida pelo sujeito paciente.",ok:true,e:"Voz passiva analítica (são + aprovadas); as Câmaras é que aprovam."},
+  {id:"b",t:"objeto indireto, pois começa com preposição.",e:"Começar com “pelas” não basta: ele indica quem faz a ação na voz passiva."},
+  {id:"c",t:"complemento nominal de “leis”.",e:"Não completa o nome “leis”; indica quem aprova."},
+  {id:"d",t:"sujeito paciente da oração.",e:"O sujeito paciente é “Leis municipais”."}]},
+ {tipo:"mc",p:"“<u>Portanto</u>, o Congresso Nacional não pode criar uma lei instituindo essa penalidade.” A conjunção sublinhada é coordenativa:",alts:[
+  {id:"a",t:"conclusiva.",ok:true,e:"Conclusivas: por isso, logo, portanto, assim. É a conclusão de a Constituição não permitir a pena de morte."},
+  {id:"b",t:"explicativa.",e:"Explicativas: porque, pois, que."},
+  {id:"c",t:"adversativa.",e:"Adversativas: mas, entretanto, porém, contudo."},
+  {id:"d",t:"aditiva.",e:"Aditivas: e, nem, não só... mas também, também."}]},
+ {tipo:"mc",p:"Em “Se qualquer pessoa perceber <u>que</u> uma lei é inconstitucional...”, o “que” sublinhado introduz aquilo que a pessoa percebe. Ele é conjunção:",alts:[
+  {id:"a",t:"subordinativa integrante.",ok:true,e:"Como em “Eu não sabia que você viria à reunião”: o “que” integrante introduz uma oração subordinada substantiva."},
+  {id:"b",t:"coordenativa explicativa.",e:"O “que” não traz uma explicação aqui; introduz o conteúdo do verbo perceber."},
+  {id:"c",t:"subordinativa comparativa.",e:"Não há comparação."},
+  {id:"d",t:"subordinativa consecutiva.",e:"Consecutivas indicam consequência (tanto que, de modo que)."}]},
+ {tipo:"mc",p:TXT_LEIS+"Qual lei tem como objetivo equilibrar as relações entre consumidores e vendedores?",alts:[
+  {id:"a",t:"O Código de Defesa do Consumidor.",ok:true,e:"É o objetivo descrito no box do CDC."},
+  {id:"b",t:"O Código Brasileiro de Trânsito.",e:"O CTB organiza o funcionamento do trânsito."},
+  {id:"c",t:"O Estatuto da Criança e do Adolescente.",e:"O ECA cuida dos direitos das crianças e dos adolescentes."},
+  {id:"d",t:"Nenhuma delas; isso é papel do MPF.",e:"O box do CDC diz exatamente isso."}]},
+ {tipo:"mc",p:"De acordo com os boxes do livro, o Estatuto da Criança e do Adolescente (ECA):",alts:[
+  {id:"a",t:"cuida dos direitos das crianças e dos adolescentes, garantindo saúde, educação e proteção.",ok:true,e:"É a descrição do box do ECA."},
+  {id:"b",t:"trata de multas e penalidades no trânsito.",e:"Isso é do Código Brasileiro de Trânsito."},
+  {id:"c",t:"protege o indivíduo quando há uma compra.",e:"Isso é do Código de Defesa do Consumidor."},
+  {id:"d",t:"proíbe a pena de morte no Brasil.",e:"Quem não permite a pena de morte é a Constituição, segundo o texto do MPF."}]},
+ {tipo:"mc",p:TXT_ART+"Em “Os órgãos <u>ou</u> entidades pertencentes ao Sistema Nacional de Trânsito”, a conjunção sublinhada é:",alts:[
+  {id:"a",t:"alternativa.",ok:true,e:"“ou” está na lista das alternativas (ou; ora; quer)."},
+  {id:"b",t:"aditiva.",e:"Aditivas: e, nem, também..."},
+  {id:"c",t:"adversativa.",e:"Não há contradição entre órgãos e entidades."},
+  {id:"d",t:"conclusiva.",e:"Não há conclusão."}]},
+ {tipo:"mc",p:TXT_CINE+"Em “Este artigo explora alguns dos vínculos entre a ciência e o cinema”, é correto afirmar que:",alts:[
+  {id:"a",t:"“Este artigo” é sujeito ativo, e “alguns dos vínculos entre a ciência e o cinema” completa o verbo sem preposição (objeto direto).",ok:true,e:"O livro diz que “este artigo” é sujeito ativo (realiza a ação de explorar); o complemento vem sem preposição."},
+  {id:"b",t:"“Este artigo” é sujeito paciente, pois sofre a ação de explorar.",e:"O artigo É quem explora: sujeito ativo."},
+  {id:"c",t:"“alguns dos vínculos” é agente da passiva.",e:"A frase está na voz ativa."},
+  {id:"d",t:"“entre a ciência e o cinema” é objeto indireto de explorar.",e:"Esse trecho faz parte do complemento “alguns dos vínculos...”."}]},
+ {tipo:"mc",p:"Colocando “São apresentadas dificuldades na avaliação da influência do cinema” na ordem canônica, temos:",alts:[
+  {id:"a",t:"Dificuldades na avaliação da influência do cinema são apresentadas.",ok:true,e:"Ordem canônica = ordem padrão: sujeito + verbo (p. 34)."},
+  {id:"b",t:"O cinema apresentou dificuldades na avaliação.",e:"Isso muda o sentido e o sujeito da frase."},
+  {id:"c",t:"Apresentadas são dificuldades do cinema na avaliação.",e:"Não é a ordem padrão e muda a frase."},
+  {id:"d",t:"Dificuldades apresentaram a avaliação da influência do cinema.",e:"Transforma o sujeito paciente em ativo e muda o sentido."}]},
+ {tipo:"mc",p:"“Nós assistimos <u>ao filme</u> ontem.” O termo sublinhado e o sentido do verbo são:",alts:[
+  {id:"a",t:"objeto indireto — assistir no sentido de “ver algo”.",ok:true,e:"Com a preposição “a”, assistir significa ver (p. 30)."},
+  {id:"b",t:"objeto direto — assistir no sentido de “cuidar”.",e:"No sentido de cuidar, o complemento vem sem preposição (assistiu os pacientes)."},
+  {id:"c",t:"complemento nominal — assistir no sentido de “ver algo”.",e:"“ao filme” completa um verbo, não um nome."},
+  {id:"d",t:"agente da passiva — assistir no sentido de “cuidar”.",e:"Não há voz passiva na frase."}]},
+ {tipo:"mc",p:"Quanto à transitividade, o verbo de “O prédio do museu possui uma arquitetura inglesa do século XX” é:",alts:[
+  {id:"a",t:"transitivo direto.",ok:true,e:"Exige objeto direto (uma arquitetura..., sem preposição)."},
+  {id:"b",t:"transitivo indireto.",e:"Não há preposição ligando o complemento."},
+  {id:"c",t:"bitransitivo.",e:"Há só um objeto (direto)."},
+  {id:"d",t:"um verbo que não precisa de complemento.",e:"O livro mostra que “possuir” precisa de complemento (ninguém diz só “ele possui...”)."}]},
+ {tipo:"mc",p:"Em “eu tenho desejo <u>de visitar o Japão</u>”, exemplo do livro, o termo sublinhado é:",alts:[
+  {id:"a",t:"complemento nominal do substantivo “desejo”.",ok:true,e:"Desejo DE alguma coisa: complemento nominal."},
+  {id:"b",t:"objeto indireto do verbo “ter”.",e:"Ele completa o nome “desejo”."},
+  {id:"c",t:"objeto direto do verbo “visitar”.",e:"O termo inteiro completa “desejo”, com a preposição “de”."},
+  {id:"d",t:"agente da passiva.",e:"Não há voz passiva."}]},
+ {tipo:"mc",p:"Segundo a DICA do livro sobre objeto indireto e complemento nominal, assinale a afirmação correta:",alts:[
+  {id:"a",t:"O objeto completa o verbo; o complemento nominal completa um nome (substantivo abstrato, adjetivo ou advérbio).",ok:true,e:"É a dica da p. 33."},
+  {id:"b",t:"O complemento nominal indica posse.",e:"O livro afirma que ele NÃO indica posse."},
+  {id:"c",t:"O complemento nominal nunca tem preposição.",e:"Pelo esquema do livro, ele tem preposição SEMPRE."},
+  {id:"d",t:"O objeto indireto completa substantivos e adjetivos.",e:"Isso é papel do complemento nominal; o objeto completa verbo."}]},
+ {tipo:"mc",p:"Ao trocar “Os alunos escreveram um artigo científico.” por “Um artigo científico foi escrito pelos alunos.”, o que muda, segundo o livro?",alts:[
+  {id:"a",t:"A ênfase: a primeira destaca quem escreveu; a segunda põe o foco no artigo.",ok:true,e:"A voz passiva desloca a ênfase para o artigo (p. 35)."},
+  {id:"b",t:"Quem escreveu: na segunda, foi o artigo que escreveu.",e:"Nas duas, quem escreveu foram os alunos."},
+  {id:"c",t:"Nada: as duas têm o mesmo destaque.",e:"O livro mostra que o foco muda."},
+  {id:"d",t:"A segunda passa a ter sujeito ativo.",e:"Na segunda, o sujeito (um artigo científico) é paciente."}]},
+ {tipo:"mc",p:"“Corri muito, <u>mas</u> não o suficiente para ganhar a maratona.” Qual conjunção pode substituir a sublinhada sem mudar o sentido?",alts:[
+  {id:"a",t:"porém",ok:true,e:"“mas” e “porém” são adversativas (contradição)."},
+  {id:"b",t:"portanto",e:"“portanto” é conclusiva; mudaria o sentido."},
+  {id:"c",t:"pois",e:"“pois” é explicativa; mudaria o sentido."},
+  {id:"d",t:"ou",e:"“ou” é alternativa; mudaria o sentido."}]},
+ {tipo:"mc",p:"“Lucas estudou <u>tanto que</u> conquistou o primeiro lugar na Olimpíada de Língua Portuguesa!” A conjunção sublinhada é subordinativa adverbial:",alts:[
+  {id:"a",t:"consecutiva.",ok:true,e:"Consecutivas (consequência): de modo que, tanto [...] que, tanto que."},
+  {id:"b",t:"comparativa.",e:"Comparativa seria “tanto quanto”, “assim como”."},
+  {id:"c",t:"proporcional.",e:"Proporcionais: à medida que, quanto mais/menos, à proporção que."},
+  {id:"d",t:"concessiva.",e:"Concessivas: embora, ainda que, por mais que."}]},
+ {tipo:"mc",p:"“<u>Segundo</u> afirma a Constituição de 1988, toda criança e todo jovem têm direito à educação no Brasil.” A conjunção sublinhada é subordinativa adverbial:",alts:[
+  {id:"a",t:"conformativa.",ok:true,e:"Conformativas (conformidade): conforme, segundo."},
+  {id:"b",t:"temporal.",e:"Temporais: quando, assim que, até que, logo que."},
+  {id:"c",t:"condicional.",e:"Condicionais: se, caso, salvo que, contanto que."},
+  {id:"d",t:"causal.",e:"Causais: porque, como."}]},
+ {tipo:"mc",p:"“Lucas se esforçou bastante, <u>assim</u>, conseguiu o que queria.” e “Mari pediu logo o almoço, <u>porque</u> estava sem comer há horas.” As conjunções sublinhadas são, respectivamente:",alts:[
+  {id:"a",t:"conclusiva e explicativa.",ok:true,e:"“assim” traz a conclusão; “porque” traz a explicação (exemplos do mapa das coordenativas)."},
+  {id:"b",t:"explicativa e conclusiva.",e:"Está invertido."},
+  {id:"c",t:"aditiva e adversativa.",e:"Não há soma nem contradição."},
+  {id:"d",t:"alternativa e aditiva.",e:"Não há alternância nem soma."}]},
+ {tipo:"rom",p:"Sobre os COMPLEMENTOS, leia as afirmativas:",itens:[
+  {n:"I",t:"Em “assistiu a vários filmes”, o “a” é preposição, e não artigo.",ok:true,e:"Correta: “filmes” é masculino e plural."},
+  {n:"II",t:"O objeto direto se liga ao verbo por meio de uma preposição.",e:"Errada: o objeto direto NÃO tem preposição; quem tem é o indireto."},
+  {n:"III",t:"O verbo bitransitivo se completa com um objeto direto e um objeto indireto.",ok:true,e:"Correta: como emprestar algo a alguém."},
+  {n:"IV",t:"Todo nome precisa de um complemento nominal.",e:"Errada: o livro avisa que nem todo nome precisa de complemento nominal."}],
+  alts:[{id:"a",t:"Apenas I e III.",ok:true,e:"II e IV são erradas."},{id:"b",t:"Apenas I, II e III.",e:"A II é errada."},{id:"c",t:"Apenas II e IV.",e:"Justamente as duas erradas."},{id:"d",t:"I, II, III e IV.",e:"II e IV são erradas."}]},
+ {tipo:"rom",p:"Sobre a VOZ PASSIVA e o AGENTE DA PASSIVA, leia as afirmativas:",itens:[
+  {n:"I",t:"Na voz passiva analítica, o sujeito é paciente, ou seja, sofre a ação expressa pelo verbo.",ok:true,e:"Correta (definição da p. 34)."},
+  {n:"II",t:"O agente da passiva é obrigatório sempre que o sujeito é paciente.",e:"Errada: ele é facultativo (opcional)."},
+  {n:"III",t:"Ao passar da voz ativa para a passiva, o objeto direto se transforma em sujeito paciente.",ok:true,e:"Correta (quebra-cabeça da p. 35)."},
+  {n:"IV",t:"Em “Um artigo científico foi escrito pelos alunos”, “pelos alunos” é o agente da passiva.",ok:true,e:"Correta: indica quem de fato realizou a ação."}],
+  alts:[{id:"a",t:"Apenas I, III e IV.",ok:true,e:"Só a II é errada."},{id:"b",t:"Apenas I e II.",e:"A II é errada."},{id:"c",t:"Apenas II e III.",e:"A II é errada."},{id:"d",t:"Apenas IV.",e:"I e III também são corretas."}]},
+ {tipo:"rom",p:"Sobre as CONJUNÇÕES, leia as afirmativas:",itens:[
+  {n:"I",t:"As conjunções coordenativas são consideradas independentes.",ok:true,e:"Correta (p. 94)."},
+  {n:"II",t:"As conjunções integrantes são “que” e “se”.",ok:true,e:"Correta (p. 98)."},
+  {n:"III",t:"As conjunções subordinativas adverbiais têm cinco subclassificações.",e:"Errada: as adverbiais são NOVE; cinco são as classificações das coordenativas."},
+  {n:"IV",t:"Uma mesma conjunção pode ter valores semânticos diferentes, dependendo do contexto.",ok:true,e:"Correta: o “e” pode indicar adição ou contradição."}],
+  alts:[{id:"a",t:"Apenas I, II e IV.",ok:true,e:"Só a III é errada."},{id:"b",t:"Apenas I e III.",e:"A III é errada."},{id:"c",t:"Apenas II, III e IV.",e:"A III é errada e faltou a I."},{id:"d",t:"I, II, III e IV.",e:"A III é errada."}]},
+ {tipo:"som",p:"Sobre os COMPLEMENTOS VERBAL e NOMINAL, some os números das afirmativas CORRETAS:",itens:[
+  {v:1,t:"Em “O Museu da Língua Portuguesa possui um acervo incrível”, “um acervo incrível” é objeto direto.",ok:true,e:"Correta: sem preposição."},
+  {v:2,t:"Em “A enfermeira assistiu os pacientes no hospital”, o verbo assistir tem o sentido de “ver algo”.",e:"Errada: aqui o sentido é cuidar."},
+  {v:4,t:"Em “Jonas emprestou o guia de visita do museu ao colega”, “ao colega” é objeto indireto.",ok:true,e:"Correta: emprestou a quem? Ao colega (com preposição)."},
+  {v:8,t:"O complemento nominal pode completar substantivos abstratos, adjetivos e advérbios.",ok:true,e:"Correta (pp. 31 e 33)."},
+  {v:16,t:"O complemento nominal indica posse.",e:"Errada: o livro diz que ele não indica posse."}]},
+ {tipo:"som",p:"Sobre a CLASSIFICAÇÃO DAS CONJUNÇÕES nas frases do livro, some os números das afirmativas CORRETAS:",itens:[
+  {v:1,t:"Em “Ou você me diz a verdade, ou não seremos mais amigos”, a conjunção é alternativa.",ok:true,e:"Correta."},
+  {v:2,t:"Em “Mari pediu logo o almoço, porque estava sem comer há horas”, “porque” é conclusiva.",e:"Errada: nesse exemplo do livro, “porque” é explicativa."},
+  {v:4,t:"Em “Contanto que ninguém fale nada, a festa surpresa será muito boa!”, a conjunção é condicional.",ok:true,e:"Correta."},
+  {v:8,t:"Em “Prestávamos mais atenção à medida que a professora dava mais ênfase ao conteúdo”, a conjunção é temporal.",e:"Errada: “à medida que” é proporcional."},
+  {v:16,t:"Em “A fim de que se resolvessem logo, Maria pediu desculpas”, a conjunção é final.",ok:true,e:"Correta."}]},
+ {tipo:"dis",p:"DISCURSIVA — Leia a frase, inspirada no texto sobre o MPF: “Os procuradores da República levaram o caso ao poder Judiciário.”<br>(a) Classifique os termos “o caso” e “ao poder Judiciário” e diga como se classifica o verbo levar quanto à transitividade.<br>(b) Passe a frase para a voz passiva analítica e aponte o sujeito paciente e o agente da passiva.<br>(c) Explique em qual termo fica o foco (ênfase) em cada versão.",
+  modelo:"Resposta-modelo (para os pais corrigirem): (a) “o caso” = objeto direto (liga-se ao verbo sem preposição: levaram o quê?); “ao poder Judiciário” = objeto indireto (com preposição: levaram a quem/aonde?). O verbo é bitransitivo (objeto direto + objeto indireto). (b) “O caso foi levado ao poder Judiciário pelos procuradores da República.” Sujeito paciente: “o caso”; agente da passiva: “pelos procuradores da República” (verbo auxiliar ser + particípio: foi levado). (c) Na voz ativa, o destaque fica em quem fez a ação (os procuradores); na voz passiva, o foco vai para o caso. Considerar certa a resposta que acertar os três itens; parcialmente certa se acertar dois."}
+];
+
+/* ====== EMBARALHAMENTO COM SEMENTE FIXA (mulberry32) — correta guardada pelo id ====== */
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+var rnd=mulberry32(21);
+Q.forEach(function(q){ if(q.alts){ var arr=q.alts.slice(); for(var i=arr.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var tmp=arr[i]; arr[i]=arr[j]; arr[j]=tmp; } q.ordem=arr; } if(q.tipo==='som'){ q.soma=q.itens.filter(function(x){return x.ok;}).reduce(function(a,x){return a+x.v;},0); } });
+var OBJ=Q.filter(function(q){return q.tipo!=='dis';}).length;
+
+/* ====== ESTADO ====== */
+var CHAVE=KIT+'_simulado_v1'; var mem={}; var estado=carregar();
+function carregar(){ try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s);}catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); } return {resp:{},enviado:false}; }
+function salvar(){ var s=JSON.stringify(estado); try{ localStorage.setItem(CHAVE,s);}catch(e){ mem[CHAVE]=s; } var d=new Date(); document.getElementById('salvo').textContent='💾 Salvo às '+d.toLocaleTimeString('pt-BR')+' de '+d.toLocaleDateString('pt-BR'); }
+var LETRAS='ABCDEFGHJKLMNPQRSTUVWXYZ';
+function gerarCodigo(ac){ var xx=(ac<10?'0':'')+ac; var yy=LETRAS[Math.floor(Math.random()*LETRAS.length)]+LETRAS[Math.floor(Math.random()*LETRAS.length)]; return 'SIM-'+xx+'-'+yy; }
+function respondida(i){ var q=Q[i], r=estado.resp[i]; if(r===undefined||r===null||r==='') return false; if(q.tipo==='dis') return String(r).trim().length>=3; return true; }
+function acertou(i){ var q=Q[i], r=estado.resp[i]; if(q.tipo==='som') return parseInt(r,10)===q.soma; if(q.tipo==='dis') return null; var a=q.alts.filter(function(x){return x.id===r;})[0]; return !!(a&&a.ok); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+function render(){
+  var c=document.getElementById('questoes'); var h=''; var G=estado.gabarito;
+  Q.forEach(function(q,i){
+    var tipoTxt={mc:'Múltipla escolha',som:'Somatório',rom:'Números romanos',dis:'Discursiva'}[q.tipo];
+    h+='<div class="q" id="q'+i+'"><span class="tipo '+q.tipo+'">'+tipoTxt+'</span><div class="num">Questão '+(i+1)+' de '+Q.length+'</div><h3>'+q.p+'</h3>';
+    if(q.tipo==='som'||q.tipo==='rom'){
+      q.itens.forEach(function(it){ var lab=q.tipo==='som'? ('('+(it.v<10?'0':'')+it.v+') ') : (it.n+'. '); var cls='afirm'+(G?(it.ok?' ok':' no'):''); h+='<div class="'+cls+'">'+lab+it.t+(G?'<div class="exp show">'+(it.ok?'✅ ':'❌ ')+it.e+'</div>':'')+'</div>'; });
+    }
+    if(q.tipo==='som'){
+      var r=estado.resp[i]; var ok=G?acertou(i):null;
+      h+='<div class="soma" style="margin-top:10px">Soma: <input type="number" min="0" max="31" id="som'+i+'" value="'+(r!==undefined?esc(r):'')+'" '+(estado.enviado?'disabled':'')+' oninput="marcar('+i+',this.value)"><span class="lab">'+(G?(ok?'✅ Correto: '+q.soma:'❌ Você somou '+esc(r)+'; o certo é '+q.soma):'')+'</span></div>';
+    } else if(q.tipo==='dis'){
+      h+='<textarea id="dis'+i+'" '+(estado.enviado?'disabled':'')+' oninput="marcar('+i+',this.value)" placeholder="Escreva aqui com as suas palavras…">'+esc(estado.resp[i]||'')+'</textarea>';
+      h+='<div class="modelo'+(G?' show':'')+'">'+q.modelo+'</div>';
+    } else {
+      q.ordem.forEach(function(a,k){
+        var letra='abcd'[k]; var sel=estado.resp[i]===a.id; var cls='alt'+(sel?' sel':'');
+        if(G){ if(a.ok) cls+=' certa'; else if(sel) cls+=' marcada-errada'; else cls+=' errada'; }
+        h+='<label class="'+cls+'"><input type="radio" name="q'+i+'" value="'+a.id+'" '+(sel?'checked':'')+' '+(estado.enviado?'disabled':'')+' onchange="marcar('+i+',\''+a.id+'\')"> <b>'+letra+')</b> '+a.t+(G?'<div class="exp show">'+(a.ok?'✅ ':'❌ ')+a.e+'</div>':'')+'</label>';
+      });
+    }
+    h+='</div>';
+  });
+  c.innerHTML=h; atualizarBarra(); if(estado.enviado) mostrarEnviado();
+}
+function marcar(i,v){ if(estado.enviado) return; estado.resp[i]=v; salvar(); var q=document.getElementById('q'+i); if(Q[i].tipo==='mc'||Q[i].tipo==='rom'){ var labs=q.querySelectorAll('.alt'); for(var k=0;k<labs.length;k++){ labs[k].classList.toggle('sel', labs[k].querySelector('input').value===v); } } atualizarBarra(); }
+function atualizarBarra(){ var n=0; Q.forEach(function(q,i){ if(respondida(i)) n++; }); document.getElementById('barra').style.width=(n/Q.length*100)+'%'; var b=document.getElementById('btn-enviar'); if(!estado.enviado){ b.disabled=n<Q.length; b.textContent=n<Q.length?'📨 Enviar simulado ('+n+' de '+Q.length+' respondidas)':'📨 Enviar simulado'; } }
+function enviar(){
+  if(estado.enviado) return;
+  var n=0; Q.forEach(function(q,i){ if(respondida(i)) n++; }); if(n<Q.length) return;
+  var ac=0; Q.forEach(function(q,i){ if(acertou(i)===true) ac++; });
+  estado.acertos=ac; estado.objetivas=OBJ; estado.codigo=gerarCodigo(ac); estado.enviado=true; estado.concluido=true; estado.concluidoEm=new Date().toISOString();
+  salvar(); render(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function mostrarEnviado(){
+  var b=document.getElementById('btn-enviar'); b.disabled=true; b.textContent='✅ Simulado enviado — respostas travadas';
+  document.getElementById('codigo').classList.add('show'); document.getElementById('cod').textContent=estado.codigo;
+  document.getElementById('codtxt').textContent='Anote este código para os pais. Ele abre o gabarito comentado (a discursiva é corrigida com a resposta-modelo).';
+  document.getElementById('gab').classList.add('show'); document.getElementById('fim').style.display='block';
+}
+function abrirGab(){ var v=document.getElementById('gab-in').value.trim().toUpperCase(); var m=document.getElementById('gab-msg'); if(v===estado.codigo||v==='PAIS-77'){ estado.gabarito=true; salvar(); render(); m.innerHTML='<span style="color:#a8f0d4">Gabarito liberado: '+estado.acertos+' acertos de '+OBJ+' questões objetivas (+ 1 discursiva para corrigir).</span>'; } else { m.innerHTML='<span style="color:#ffbcb5">Código incorreto.</span>'; } }
+function exportar(){ var blob=new Blob([JSON.stringify(estado,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='simulado_cidade-das-pontes.json'; a.click(); }
+function importar(ev){ var f=ev.target.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(){ try{ estado=JSON.parse(r.result); salvar(); render(); mostrarModal('✅ Progresso importado!',false);}catch(e){ mostrarModal('❌ Arquivo inválido.',false);} }; r.readAsText(f); }
+var acaoZerar=null;
+function pedirZerar(){ acaoZerar=true; mostrarModal('Apagar as respostas deste Simulado? (Se ele já foi enviado, o código e a conclusão são mantidos.)',true); }
+function mostrarModal(txt,confirmar){ document.getElementById('modal-txt').innerHTML=txt; document.getElementById('modal').classList.add('show'); document.getElementById('modal-cancel').style.display=confirmar?'inline-block':'none'; document.getElementById('modal-ok').textContent=confirmar?'Sim, apagar':'Ok';
+  document.getElementById('modal-ok').onclick=function(){ if(confirmar&&acaoZerar){ if(!estado.enviado){ estado={resp:{},enviado:false}; salvar(); render(); } else { mostrarModal('O Simulado já foi enviado: as respostas ficam travadas. Para refazer do zero, use "Zerar o kit inteiro" no Início.',false); acaoZerar=null; return; } } acaoZerar=null; fecharModal(); }; }
+function fecharModal(){ document.getElementById('modal').classList.remove('show'); }
+
+if(checarTrava()){ render(); }
+</script>
+</body>
+</html>

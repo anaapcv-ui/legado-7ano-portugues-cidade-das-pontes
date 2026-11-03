@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo · Cidade das Pontes · Português 7º</title>
+<style>
+  :root{--fundo:#0b1822;--fundo2:#11233a;--borda:#1f3a52;--borda2:#2c5070;--verde:#4fd8a6;--magenta:#b9a3ff;--laranja:#f6b443;--limao:#ffd166;--vermelho:#ff6f61;--texto:#eef4f8;--cinza:#93a9bb}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Trebuchet MS',Verdana,'Segoe UI',sans-serif;background:radial-gradient(900px 420px at 50% -8%,#16304a,#0b1822 62%),var(--fundo);color:var(--texto);line-height:1.6;padding-bottom:60px;font-size:17px}
+  header{background:linear-gradient(120deg,#3a2a0c,#16304a 55%,#0f3a32);padding:26px 18px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--laranja)}
+  header .selo{font-size:.76rem;letter-spacing:2px;color:#ffe2a8;text-transform:uppercase}
+  header h1{font-size:1.5rem;margin:6px 0 2px}
+  header p{color:#efe4cc;font-size:.92rem}
+  .wrap{max-width:920px;margin:0 auto;padding:16px}
+  .barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+  .barra-nav a{background:var(--fundo2);color:var(--texto);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:.85rem;border:1px solid var(--borda)}
+  .barra-nav a.on{background:var(--laranja);color:#2a1a00;font-weight:bold}
+  .barra-nav a.lock{opacity:.5}
+  .intro{background:var(--fundo2);border:1px solid var(--borda);border-radius:14px;padding:16px;margin-bottom:16px}
+  .intro h2{color:var(--laranja);font-size:1.1rem;margin-bottom:8px}
+  .sec{margin:28px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sec h2{font-size:1.25rem}
+  .sec .pill{font-size:.7rem;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:12px;font-weight:bold}
+  .pill.ene{background:var(--laranja);color:#2a1a00} .pill.mac{background:var(--verde);color:#062a1e} .pill.mic{background:var(--magenta);color:#1c1240} .pill.sau{background:var(--limao);color:#2e2400}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+  .card{background:var(--fundo2);border:1px solid var(--borda);border-radius:14px;padding:14px;border-top:4px solid var(--laranja)}
+  .card.mac{border-top-color:var(--verde)} .card.mic{border-top-color:var(--magenta)} .card.sau{border-top-color:var(--limao)}
+  .card h3{font-size:1rem;margin-bottom:8px}
+  .card ul{margin-left:18px}
+  .card li{margin-bottom:5px;font-size:.94rem}
+  .card b{color:var(--laranja)} .card.mac b{color:var(--verde)} .card.mic b{color:var(--magenta)} .card.sau b{color:var(--limao)}
+  .postit{background:#ffe88a;color:#3a2a00;border-radius:4px;padding:12px 14px;font-size:.93rem;box-shadow:3px 4px 10px rgba(0,0,0,.4);transform:rotate(-1deg);margin:14px 0}
+  .postit b{color:#7a4a00}
+  .peg{background:#3a1a1c;border:2px solid var(--vermelho);border-radius:12px;padding:12px 14px;margin:14px 0;font-size:.93rem}
+  .peg b{color:#ffbcb5}
+  .narrador{background:#1d1d40;border-left:4px solid var(--magenta);border-radius:0 12px 12px 0;padding:10px 14px;margin:14px 0;font-size:.93rem;font-style:italic;color:#ddd2ff}
+  .flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .flip{perspective:900px;height:180px;cursor:pointer}
+  .flip .inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .flip.on .inner{transform:rotateY(180deg)}
+  .flip .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:.9rem}
+  .flip .front{background:linear-gradient(135deg,#183450,#11233a);border:1px solid var(--borda2);font-weight:bold}
+  .flip .front small{display:block;color:var(--cinza);font-weight:normal;font-size:.74rem;margin-top:6px}
+  .flip .back{background:#10302a;border:1px solid var(--verde);transform:rotateY(180deg)}
+  .tabela{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+  .tabela th,.tabela td{border:1px solid var(--borda);padding:7px 9px;text-align:left;vertical-align:top}
+  .tabela th{background:#14293f}
+  .scroll{overflow-x:auto}
+  .escada{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .escada .deg{flex:1;min-width:170px;border-radius:12px;padding:10px 12px;font-size:.88rem;border:1px solid var(--borda2)}
+  .escada .deg b{display:block;font-size:.95rem;margin-bottom:4px}
+  .d1{background:#0f3a32} .d1 b{color:var(--verde)}
+  .d2{background:#2a3014} .d2 b{color:#c9e86b}
+  .d3{background:#3a2a10} .d3 b{color:var(--laranja)}
+  .d4{background:#3a1a1c} .d4 b{color:var(--vermelho)}
+  .fluxo{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin-top:8px}
+  .fluxo .et{flex:1;min-width:140px;background:#0f1f30;border:1px solid var(--borda2);border-left:4px solid var(--verde);border-radius:0 10px 10px 0;padding:10px;font-size:.87rem}
+  .fluxo .et b{color:var(--verde)}
+  .gloss{columns:2;column-gap:18px}
+  .gloss div{break-inside:avoid;margin-bottom:8px;font-size:.92rem}
+  .gloss b{color:var(--laranja)}
+  @media(max-width:600px){.gloss{columns:1}}
+  .fim{background:linear-gradient(120deg,#0f3a32,#12443a);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:24px;text-align:center}
+  .fim h3{color:#a8f0d4;margin-bottom:8px}
+  .fim button{background:var(--verde);color:#062a1e;border:none;border-radius:10px;padding:12px 20px;font-size:1rem;font-weight:bold;margin:6px;cursor:pointer;font-family:inherit}
+  .fim button:disabled{background:#1c2b3a;color:#6d8296;cursor:not-allowed}
+  .fim a.btn{display:inline-block;margin:6px;background:var(--magenta);color:#1c1240;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:10px}
+  .fim a.btn.off{background:#1c2b3a;color:#6d8296;pointer-events:none}
+  .painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--fundo2);border:1px solid var(--borda);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+  .mini{background:var(--fundo);color:var(--texto);border:1px solid var(--borda2);border-radius:8px;padding:6px 10px;font-size:.8rem;cursor:pointer;font-family:inherit}
+  .modal-bg{display:none;position:fixed;inset:0;background:rgba(10,6,12,.97);z-index:50;align-items:center;justify-content:center;padding:16px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--fundo2);border:1px solid var(--laranja);border-radius:14px;padding:22px;max-width:440px;text-align:center}
+  .modal p{margin-bottom:14px}
+  .modal .big{font-size:2.2rem}
+  .modal a{display:inline-block;background:var(--laranja);color:#2a1a00;border-radius:8px;padding:10px 18px;font-weight:bold;text-decoration:none}
+  .rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Cidade das Pontes · Português 7º ano · Colégio Legado</div>
+  <h1>🗺️ Resumo — Mapa das Pontes</h1>
+  <p>Termos integrantes da oração (Cap. 9) e Conjunções (Cap. 10) em tabelas, cartas e post-its</p>
+</header>
+
+<div class="wrap">
+  <nav class="barra-nav" id="nav">
+    <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+    <a href="quiz.html">🎯 Quiz</a>
+    <a class="on" href="resumo.html">🗺️ Resumo</a>
+    <a href="simulado.html" data-etapa="simulado">📝 Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </nav>
+
+  <div class="intro">
+    <h2>🗺️ O mapa da cidade inteira</h2>
+    <p>Use este resumo para fechar as dúvidas que o Quiz mostrou e para revisar na véspera. Leia até o fim: lá embaixo está o botão <b>"Li o resumo até o fim"</b>, que destrava o <b>📝 Simulado</b>.</p>
+  </div>
+  <div class="painel"><span id="salvo">📏 Rolagem máxima: 0%</span><button class="mini" onclick="exportar()">📥 Exportar</button></div>
+
+  <div class="narrador">🎙️ Nota do narrador: na Cidade das Pontes, nenhuma palavra fica sozinha. Os <b>complementos</b> atravessam até o verbo ou até o nome — às vezes direto, às vezes pela ponte da <b>preposição</b>. E as <b>conjunções</b> são as grandes pontes que ligam ideias inteiras.</div>
+
+  <!-- ===== TERMOS ===== -->
+  <div class="sec"><span class="pill ene">Pontes 1–5</span><h2>🏛️ Termos da oração e complemento verbal</h2></div>
+  <div class="grid">
+    <div class="card"><h3>🧱 Essenciais × integrantes</h3><ul>
+      <li><b>Essenciais:</b> sujeito e predicado.</li>
+      <li><b>Integrantes</b> (integram e completam os obrigatórios): <b>complemento verbal</b> (objetos), <b>complemento nominal</b> e <b>agente da passiva</b>.</li>
+      <li>Complemento verbal = acrescenta sentido ao <b>verbo</b>: “O prédio do museu possui <b>uma arquitetura inglesa do século XX</b>.”</li>
+    </ul></div>
+    <div class="card"><h3>🌉 O esquema do livro</h3>
+      <div class="fluxo">
+        <div class="et"><b>Verbo</b> → tem preposição antes do complemento?</div>
+        <div class="et"><b>SIM</b> → objeto <b>indireto</b><br>“assistiu <b>a</b> vários filmes”</div>
+        <div class="et"><b>NÃO</b> → objeto <b>direto</b><br>“possui um acervo incrível”</div>
+      </div>
+    </div>
+    <div class="card"><h3>🩺 O verbo assistir</h3><ul>
+      <li><b>Cuidar</b> → objeto direto: “A enfermeira assistiu <b>os pacientes</b> no hospital.”</li>
+      <li><b>Ver algo</b> → objeto indireto: “Nós assistimos <b>ao filme</b> ontem.”</li>
+      <li>Os verbos podem <b>mudar de sentido</b> conforme o complemento.</li>
+    </ul></div>
+  </div>
+  <div class="peg">⚠️ <b>Pegadinha do “a”:</b> em “assistiu <b>a</b> vários filmes”, “filmes” é masculino e plural — então esse “a” <b>não é artigo</b>, é <b>preposição</b> (palavra que une termos).</div>
+
+  <div class="scroll"><table class="tabela">
+    <thead><tr><th>Transitividade</th><th>O que exige</th><th>Exemplo do livro</th></tr></thead>
+    <tbody>
+      <tr><td><b style="color:var(--laranja)">Transitivo direto</b></td><td>Objeto direto (sem preposição)</td><td>possui <b>um acervo incrível</b></td></tr>
+      <tr><td><b style="color:var(--laranja)">Transitivo indireto</b></td><td>Objeto indireto (com preposição)</td><td>assistiu <b>a vários filmes</b> (ver)</td></tr>
+      <tr><td><b style="color:var(--laranja)">Bitransitivo</b></td><td>Um objeto direto <b>e</b> um indireto</td><td>Jonas emprestou <b>o guia de visita do museu</b> (OD) <b>ao colega</b> (OI)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="postit">📌 <b>Dica de prova:</b> no bitransitivo, faça as duas perguntas ao verbo: <b>o quê?</b> (objeto direto) e <b>a quem?</b> (objeto indireto). Transitividade = relação entre o verbo e seus complementos.</div>
+
+  <!-- ===== COMPLEMENTO NOMINAL ===== -->
+  <div class="sec"><span class="pill mac">Pontes 6–7</span><h2>🔑 Complemento nominal</h2></div>
+  <div class="grid">
+    <div class="card mac"><h3>📌 O que é</h3><ul>
+      <li>Completa o sentido de um <b>nome</b>: <b>substantivo abstrato</b>, <b>adjetivo</b> ou <b>advérbio</b>.</li>
+      <li>“desejo <b>de decifrar</b>” → desejo (substantivo) + de (preposição) + decifrar (verbo).</li>
+      <li>Ninguém sente só desejo: sente desejo <b>de alguma coisa</b>.</li>
+    </ul></div>
+    <div class="card mac"><h3>🎯 Sentido de alvo</h3><ul>
+      <li>“A cidade tem admiração <b>pela arte</b>.” → a arte recebe a admiração: é o <b>alvo</b>.</li>
+      <li>O complemento nominal <b>não indica posse</b>.</li>
+      <li>Tem preposição <b>SEMPRE</b>.</li>
+    </ul></div>
+    <div class="card mac"><h3>🧪 OD + complemento nominal juntos</h3><ul>
+      <li>“[As HQs] proporcionam <b>um ensino significativo, produtivo e relevante para a construção do conhecimento</b>” → objeto direto de proporcionar.</li>
+      <li>Dentro dele: relevante <b>para a construção do conhecimento</b> → complemento nominal.</li>
+    </ul></div>
+  </div>
+  <div class="scroll"><table class="tabela">
+    <thead><tr><th></th><th>Objeto indireto</th><th>Complemento nominal</th></tr></thead>
+    <tbody>
+      <tr><td><b>Completa</b></td><td>um <b>verbo</b></td><td>um <b>nome</b> (substantivo abstrato, adjetivo, advérbio)</td></tr>
+      <tr><td><b>Preposição</b></td><td>sim (é o que o diferencia do objeto direto)</td><td>sempre</td></tr>
+      <tr><td><b>Exemplo</b></td><td>assistiu <b>a vários filmes</b></td><td>desejo <b>de decifrar</b> · admiração <b>pela arte</b></td></tr>
+    </tbody>
+  </table></div>
+  <div class="postit">📌 <b>Atenção!</b> Nem todo verbo possui complemento verbal, e <b>nem todo nome precisa de complemento nominal</b>.</div>
+
+  <!-- ===== PASSIVA ===== -->
+  <div class="sec"><span class="pill sau">Pontes 8–9</span><h2>🧩 Sujeito paciente e agente da passiva</h2></div>
+  <div class="grid">
+    <div class="card sau"><h3>🎬 Sujeito ativo</h3><ul>
+      <li><b>Realiza</b> a ação do verbo.</li>
+      <li>“<b>Este artigo</b> explora alguns dos vínculos entre a ciência e o cinema.”</li>
+    </ul></div>
+    <div class="card sau"><h3>📥 Sujeito paciente</h3><ul>
+      <li><b>Sofre/recebe</b> a ação; alguém de fora a realiza.</li>
+      <li>“<b>Dificuldades na avaliação da influência do cinema</b> são apresentadas.” (ordem canônica)</li>
+      <li>Concorda em número com o verbo (“são”).</li>
+    </ul></div>
+    <div class="card sau"><h3>🙋 Agente da passiva</h3><ul>
+      <li>Termo da <b>voz passiva analítica</b> que indica <b>quem pratica a ação</b> sobre o sujeito paciente.</li>
+      <li>Só aparece com sujeito paciente e é <b>facultativo</b> (opcional).</li>
+    </ul></div>
+  </div>
+  <div class="escada">
+    <div class="deg d3"><b>1. Objeto direto</b>vira <b>sujeito paciente</b></div>
+    <div class="deg d2"><b>2. Verbo</b>vira <b>forma composta</b> (ser + particípio)</div>
+    <div class="deg d1"><b>3. Sujeito ativo</b>vira <b>agente da passiva</b></div>
+  </div>
+  <div class="scroll"><table class="tabela">
+    <thead><tr><th>Voz ativa</th><th>Voz passiva analítica</th></tr></thead>
+    <tbody>
+      <tr><td><b>Os alunos</b> (sujeito ativo) escreveram <b>um artigo científico</b> (objeto direto).</td><td><b>Um artigo científico</b> (sujeito paciente) <b>foi escrito</b> <b>pelos alunos</b> (agente da passiva).</td></tr>
+      <tr><td>Destaque em <b>quem escreveu</b>.</td><td>Foco no <b>artigo</b>.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="peg">⚠️ <b>Pegadinha:</b> “pela/pelo” nem sempre é agente da passiva! Em “admiração <b>pela arte</b>” não há voz passiva — é complemento nominal. Agente da passiva só existe com <b>ser + particípio</b> e sujeito paciente.</div>
+
+  <!-- ===== CONJUNÇÕES ===== -->
+  <div class="sec"><span class="pill mic">Pontes 10–12</span><h2>🔗 Conjunções</h2></div>
+  <div class="grid">
+    <div class="card mic"><h3>📌 Definição</h3><ul>
+      <li><b>Conjunção</b> = palavra que relaciona outras palavras, <b>determinando um sentido</b>.</li>
+      <li>O sentido depende do <b>contexto</b> (valor <b>semântico</b>): o “e” soma em “Compreendi bem... <b>e</b> fui bem na prova!” e contradiz em “Vi que as regras estavam coladas na porta, <b>e</b> acabei me esquecendo de conferir.”</li>
+    </ul></div>
+    <div class="card mic"><h3>⚖️ Dois grupos</h3><ul>
+      <li><b>Coordenativas</b> → ligam termos <b>independentes</b> (5 tipos).</li>
+      <li><b>Subordinativas</b> → ligam termos <b>dependentes</b>: <b>integrantes</b> (que, se) e <b>adverbiais</b> (9 tipos).</li>
+    </ul></div>
+  </div>
+
+  <h3 style="margin:18px 0 8px">🃏 Coordenativas — toque na carta para virar</h3>
+  <div class="flips">
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">➕ Aditivas<small>toque para ver</small></div><div class="face back">Adição: e, nem, não só... mas também, também.<br><i>“Não fiz o que havia programado para hoje nem o que tinha que ser feito ontem.”</i></div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">↔️ Adversativas<small>toque para ver</small></div><div class="face back">Contradição: mas, entretanto, porém, contudo.<br><i>“Corri muito, mas não o suficiente para ganhar a maratona.”</i></div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">💬 Explicativas<small>toque para ver</small></div><div class="face back">Explicação: porque, pois, que.<br><i>“Mari pediu logo o almoço, porque estava sem comer há horas.”</i></div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">✅ Conclusivas<small>toque para ver</small></div><div class="face back">Conclusão: por isso, logo, portanto, assim.<br><i>“Lucas se esforçou bastante, assim, conseguiu o que queria.”</i></div></div></div>
+    <div class="flip" onclick="this.classList.toggle('on')"><div class="inner"><div class="face front">🔀 Alternativas<small>toque para ver</small></div><div class="face back">Alternância: ou... ou; ora... ora; quer... quer.<br><i>“Ou você me diz a verdade, ou não seremos mais amigos.”</i></div></div></div>
+  </div>
+  <div class="postit">📌 <b>Use a conjunção certa:</b> “Marcelo comprou uma blusa, <s>entretanto</s> gostou dela” está inadequado (não há contradição). Melhor: “Marcelo comprou uma blusa <b>e</b> gostou dela.”</div>
+
+  <h3 style="margin:18px 0 8px">🧭 Subordinativas</h3>
+  <div class="scroll"><table class="tabela">
+    <thead><tr><th>Tipo</th><th>Sentido</th><th>Conjunções</th><th>Exemplo do livro</th></tr></thead>
+    <tbody>
+      <tr><td><b style="color:var(--magenta)">Integrante</b></td><td>introduz oração subordinada substantiva</td><td>que, se</td><td>Eu não sabia <b>que</b> você viria à reunião.</td></tr>
+      <tr><td><b style="color:var(--magenta)">Causal</b></td><td>causa</td><td>porque, como</td><td><b>Como</b> viajei, não consegui ir ao seu aniversário.</td></tr>
+      <tr><td><b style="color:var(--magenta)">Concessiva</b></td><td>exceção</td><td>embora, ainda que, por mais que</td><td><b>Embora</b> Luana já soubesse, ela escutou o Marcos até o fim.</td></tr>
+      <tr><td><b style="color:var(--magenta)">Comparativa</b></td><td>comparação</td><td>tanto quanto, assim como, como</td><td>Poliana gosta de doce <b>tanto quanto</b> (gosta) de salgado!</td></tr>
+      <tr><td><b style="color:var(--magenta)">Condicional</b></td><td>condição</td><td>se, caso, salvo que, contanto que</td><td><b>Contanto que</b> ninguém fale nada, a festa surpresa será muito boa!</td></tr>
+      <tr><td><b style="color:var(--magenta)">Conformativa</b></td><td>conformidade</td><td>conforme, segundo</td><td><b>Segundo</b> afirma a Constituição de 1988, toda criança e todo jovem têm direito à educação.</td></tr>
+      <tr><td><b style="color:var(--magenta)">Consecutiva</b></td><td>consequência</td><td>de modo que, tanto [...] que, tanto que</td><td>Lucas estudou <b>tanto que</b> conquistou o primeiro lugar.</td></tr>
+      <tr><td><b style="color:var(--magenta)">Proporcional</b></td><td>proporção</td><td>à medida que, quanto mais/menos, à proporção que</td><td>Prestávamos mais atenção <b>à medida que</b> a professora dava mais ênfase ao conteúdo.</td></tr>
+      <tr><td><b style="color:var(--magenta)">Temporal</b></td><td>tempo</td><td>quando, assim que, até que, logo que</td><td><b>Logo que</b> eles disseram saber sobre o CDC, o dono da padaria aceitou estar errado.</td></tr>
+      <tr><td><b style="color:var(--magenta)">Final</b></td><td>finalidade, motivo</td><td>para que, a fim de que</td><td><b>A fim de que</b> se resolvessem logo, Maria pediu desculpas.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="peg">⚠️ <b>Palavras que aparecem em duas listas:</b> <b>porque</b> (explicativa / causal) · <b>como</b> (causal / comparativa) · <b>se</b> (integrante / condicional) · <b>logo</b> (conclusiva) × <b>logo que</b> (temporal). Leia o contexto!</div>
+
+  <!-- ===== TEXTOS NORMATIVOS ===== -->
+  <div class="sec"><span class="pill mic">Textos do Cap. 10</span><h2>📜 As leis citadas no livro</h2></div>
+  <div class="grid">
+    <div class="card mic"><h3>🛒 CDC</h3><ul><li>Protege quem compra; produtos e serviços de qualidade, informações claras; formas de reclamar; equilibra consumidores e vendedores.</li></ul></div>
+    <div class="card mic"><h3>🚦 Código de Trânsito</h3><ul><li>Organiza o trânsito: regras para motoristas, pedestres e todos; fiscalização, multas e penalidades.</li></ul></div>
+    <div class="card mic"><h3>🧒 ECA</h3><ul><li>Cuida dos direitos de crianças e adolescentes: saúde, educação e proteção; evita e pune violência, exploração e abuso.</li></ul></div>
+    <div class="card mic"><h3>⚖️ MPF</h3><ul><li>Fiscaliza o cumprimento das leis federais; qualquer pessoa pode denunciar uma lei inconstitucional; o MPF pode pedir ao Judiciário a anulação da lei.</li></ul></div>
+  </div>
+
+  <!-- ===== GLOSSÁRIO ===== -->
+  <div class="sec"><h2>📚 Glossário</h2></div>
+  <div class="gloss">
+    <div><b>Integrar</b> — completar os termos obrigatórios da oração.</div>
+    <div><b>Preposição</b> — palavra que usamos para unir termos ou expressões.</div>
+    <div><b>Transitividade</b> — relação entre o verbo e seus complementos.</div>
+    <div><b>Morfologia</b> — parte da gramática que estuda a estrutura, a formação e a classificação das palavras.</div>
+    <div><b>Nomes</b> — palavras que mudam em número e gênero: substantivos e adjetivos.</div>
+    <div><b>Canônico</b> — padrão, estrutura mais comum.</div>
+    <div><b>Voz passiva analítica</b> — sujeito paciente + verbo auxiliar (geralmente ser) + particípio do verbo principal.</div>
+    <div><b>Facultativo</b> — não obrigatório, opcional.</div>
+    <div><b>Semântico</b> — relativo à significação, ao significado.</div>
+    <div><b>Conjunção</b> — palavra que relaciona outras palavras, determinando um sentido.</div>
+  </div>
+
+  <div class="fim" id="fim">
+    <h3 id="fim-h3">🔒 Próxima etapa: Simulado</h3>
+    <p id="fim-txt">Role até aqui e confirme a leitura para destravar o Simulado.</p>
+    <button id="btn-li" onclick="confirmarLeitura()" disabled>✅ Li o resumo até o fim</button>
+    <a class="btn off" id="btn-prox" href="simulado.html">📝 Pronto para o Simulado!</a>
+  </div>
+
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 🌉🏮</div>
+</div>
+
+<div class="modal-bg" id="lock">
+  <div class="modal">
+    <div class="big">🔒</div>
+    <p><b>Esta etapa ainda está trancada.</b></p>
+    <p id="lock-txt">Para abrir o Resumo, envie o Quiz.</p>
+    <a href="index.html">Voltar ao início</a>
+  </div>
+</div>
+
+<script>
+/* ====== TRILHA COM CADEADOS (módulo comum do kit) ====== */
+var KIT='cidade_pontes';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Guiada', arquivo:'leitura-guiada.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+links[i].textContent.replace('🔒 ',''); } else { links[i].classList.remove('lock'); links[i].textContent=links[i].textContent.replace('🔒 ',''); } }
+}
+function checarTrava(){
+  if(podeAbrir('resumo')) return true;
+  var L=lerJSON(KIT+'_leitura_v1');
+  document.getElementById('lock-txt').textContent=(L&&L.concluido)?'Para abrir o Resumo, envie o Quiz.':'Para abrir o Resumo, conclua a Leitura Guiada e envie o Quiz.';
+  document.getElementById('lock').classList.add('show');
+  document.querySelector('.wrap').style.filter='blur(8px)';
+  document.querySelector('.wrap').setAttribute('aria-hidden','true');
+  return false;
+}
+
+/* ====== ESTADO DO RESUMO ====== */
+var CHAVE=KIT+'_resumo_v1'; var mem={}; var estado=carregar();
+function carregar(){ try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s);}catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); } return {rolagemMax:0}; }
+function salvar(){ var s=JSON.stringify(estado); try{ localStorage.setItem(CHAVE,s);}catch(e){ mem[CHAVE]=s; } document.getElementById('salvo').textContent='📏 Rolagem máxima: '+Math.round(estado.rolagemMax||0)+'%'; }
+function medirRolagem(){
+  var h=document.documentElement; var total=h.scrollHeight-h.clientHeight; var pct= total<=0?100:Math.min(100,(window.scrollY||h.scrollTop)/total*100);
+  if(pct>(estado.rolagemMax||0)){ estado.rolagemMax=pct; salvar(); }
+  var b=document.getElementById('btn-li'); if(!estado.concluido && (estado.rolagemMax||0)>=90){ b.disabled=false; }
+}
+function confirmarLeitura(){ if(estado.concluido) return; if((estado.rolagemMax||0)<90) return; estado.concluido=true; estado.concluidoEm=new Date().toISOString(); salvar(); atualizarFim(); }
+function atualizarFim(){
+  var h3=document.getElementById('fim-h3'), txt=document.getElementById('fim-txt'), b=document.getElementById('btn-li'), a=document.getElementById('btn-prox');
+  if(estado.concluido||trilhaLiberada()){ h3.textContent='✅ Resumo lido — Simulado destravado!'; txt.textContent=estado.concluido?'Agora encare o Simulado valendo, como se fosse a prova.':'Trilha liberada pelos pais.'; b.disabled=!!estado.concluido||(estado.rolagemMax||0)<90; b.textContent=estado.concluido?'✅ Resumo concluído':'✅ Li o resumo até o fim'; a.classList.remove('off'); }
+  else { h3.textContent='🔒 Próxima etapa: Simulado'; txt.textContent=(estado.rolagemMax||0)>=90?'Confirme a leitura para destravar o Simulado.':'Role até o fim da página para habilitar o botão (rolagem: '+Math.round(estado.rolagemMax||0)+'%).'; a.classList.add('off'); }
+  marcarNav();
+}
+function exportar(){ var blob=new Blob([JSON.stringify(estado,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='resumo_cidade-das-pontes.json'; a.click(); }
+
+if(checarTrava()){ salvar(); atualizarFim(); window.addEventListener('scroll',function(){ medirRolagem(); atualizarFim(); }); setTimeout(function(){ medirRolagem(); atualizarFim(); },300); } else { marcarNav(); }
+</script>
+</body>
+</html>
